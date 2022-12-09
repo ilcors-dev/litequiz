@@ -1,4 +1,4 @@
-use std::{process::Command, path::PathBuf};
+use std::{path::PathBuf, process::Command};
 
 mod dsync;
 mod tsync;
