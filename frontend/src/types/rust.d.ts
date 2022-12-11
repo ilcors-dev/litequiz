@@ -22,6 +22,11 @@ interface PaginationResult<T> {
   num_pages: number
 }
 
+interface WithHiddenAnswer {
+  id: number
+  question: string
+}
+
 interface Todo {
   id: number
   text: string

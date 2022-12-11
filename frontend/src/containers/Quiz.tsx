@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { QuizRow } from '../components/QuizRow';
 
 const api = {
 	get: async (): Promise<Question[]> =>
@@ -36,11 +37,11 @@ export const Quiz = () => {
 
 	return (
 		<div className="">
-			<ul>
-				{questions.map((q) => (
-					<li>{q.question}</li>
+			<ol className="">
+				{questions.map((q, i) => (
+					<QuizRow q={q} i={i} className="my-5" />
 				))}
-			</ul>
+			</ol>
 		</div>
 	);
 };

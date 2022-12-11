@@ -1,10 +1,12 @@
-use crate::models::questions::{Question, QuestionForm};
+use crate::models::questions::{types::WithHiddenAnswer, Question, QuestionForm};
 use actix_web::{
     delete, get, post, put,
     web::{Data, Json, Path, Query},
     Error, HttpResponse, Result,
 };
 use create_rust_app::Database;
+use diesel::{QueryDsl, RunQueryDsl};
+use rand::{seq::SliceRandom, thread_rng};
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
@@ -14,20 +16,25 @@ pub struct PaginationParams {
 }
 
 #[get("")]
-async fn index(db: Data<Database>, Query(info): Query<PaginationParams>) -> HttpResponse {
+async fn index(db: Data<Database>) -> HttpResponse {
+    use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
-    let result = Question::get(&mut con);
+    let result = questions
+        .select((id, question))
+        .load::<WithHiddenAnswer>(&mut con);
 
     if result.is_ok() {
-        let items = result.unwrap();
+        let mut items: Vec<WithHiddenAnswer> = result.unwrap();
 
-        let random = items
-            .into_iter()
-            .take(40 as usize)
-            .collect::<Vec<Question>>();
+        items.shuffle(&mut thread_rng());
 
-        HttpResponse::Ok().json(random)
+        HttpResponse::Ok().json(
+            items
+                .into_iter()
+                .take(40 as usize)
+                .collect::<Vec<WithHiddenAnswer>>(),
+        )
     } else {
         HttpResponse::InternalServerError().finish()
     }
