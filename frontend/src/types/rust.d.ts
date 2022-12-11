@@ -1,5 +1,27 @@
 /* This file is generated and managed by tsync */
 
+interface Question {
+  id: number
+  question: string
+  answer: boolean
+  created_at: Date
+  updated_at: Date
+}
+
+interface QuestionForm {
+  question: string
+  answer: boolean
+}
+
+interface PaginationResult<T> {
+  items: Array<T>
+  total_items: number
+  /** 0-based index */
+  page: number
+  page_size: number
+  num_pages: number
+}
+
 interface Todo {
   id: number
   text: string
@@ -17,6 +39,11 @@ interface PaginationResult<T> {
   page: number
   page_size: number
   num_pages: number
+}
+
+interface PaginationParams {
+  page: number
+  page_size: number
 }
 
 interface PaginationParams {
