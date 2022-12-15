@@ -33,8 +33,9 @@ async fn main() -> std::io::Result<()> {
         let mut api_scope = web::scope("/api");
         api_scope = api_scope
             .service(services::todo::endpoints(web::scope("/todos")))
+            .service(services::categories::endpoints(web::scope("/categories")))
             .service(services::quiz::endpoints(web::scope("/quiz")))
-            .service(services::categories::endpoints(web::scope("/categories")));
+            .service(services::quiz_status::endpoints(web::scope("/quiz-status")));
 
         #[cfg(debug_assertions)]
         { /* Development-only routes */ }

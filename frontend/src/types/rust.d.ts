@@ -77,6 +77,11 @@ interface QuizStarterParams {
   category_id: number
 }
 
+interface QuizStatus {
+  category?: Category
+  active: boolean
+}
+
 interface PaginationParams {
   page: number
   page_size: number

@@ -1,43 +1,71 @@
 use crate::models::questions::{types::WithHiddenAnswer, Question, QuestionForm};
+use actix_session::Session;
 use actix_web::{
     delete, get, post, put,
     web::{Data, Json, Path, Query},
     Error, HttpResponse, Result,
 };
 use create_rust_app::Database;
-use diesel::{QueryDsl, RunQueryDsl};
+use diesel::{associations::HasTable, prelude::*};
 use rand::{seq::SliceRandom, thread_rng};
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
-pub struct PaginationParams {
-    pub page: i64,
-    pub page_size: i64,
+pub struct QuizStarterParams {
+    pub category_id: i32,
 }
 
 #[get("")]
-async fn index(db: Data<Database>) -> HttpResponse {
+async fn index(
+    db: Data<Database>,
+    session: Session,
+    Query(info): Query<QuizStarterParams>,
+) -> HttpResponse {
     use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
-    let result = questions
+    // check whether the quiz is currently active
+    let quiz_ids = session.get::<Vec<i32>>("quiz").unwrap();
+    let has_quiz = quiz_ids.is_some();
+
+    let mut query = questions::table().into_boxed();
+
+    // if so we should return always the same questions saved in the session
+    if has_quiz {
+        query = query.filter(id.eq_any(quiz_ids.unwrap()));
+    }
+
+    let result = query
+        .filter(category_id.eq(info.category_id))
         .select((id, question))
         .load::<WithHiddenAnswer>(&mut con);
 
     if result.is_ok() {
         let mut items: Vec<WithHiddenAnswer> = result.unwrap();
 
-        items.shuffle(&mut thread_rng());
+        // if the quiz is not active we should shuffle the questions and save them in the session, otherwise keep them
+        // as they are
+        if !has_quiz {
+            items.shuffle(&mut thread_rng());
 
-        HttpResponse::Ok().json(
-            items
+            items = items
                 .into_iter()
                 .take(40 as usize)
-                .collect::<Vec<WithHiddenAnswer>>(),
-        )
-    } else {
-        HttpResponse::InternalServerError().finish()
+                .collect::<Vec<WithHiddenAnswer>>();
+
+            session
+                .insert("quiz_category_id", info.category_id)
+                .expect("Error saving quiz category to session");
+
+            session
+                .insert("quiz", items.iter().map(|q| q.id).collect::<Vec<i32>>())
+                .expect("Error saving quiz to session");
+        }
+
+        return HttpResponse::Ok().json(items);
     }
+
+    HttpResponse::InternalServerError().finish()
 }
 
 #[get("/{id}")]
@@ -81,17 +109,15 @@ async fn update(
     }
 }
 
-#[delete("/{id}")]
-async fn destroy(db: Data<Database>, item_id: Path<i32>) -> HttpResponse {
-    let mut con = db.get_connection();
+#[delete("")]
+async fn destroy(session: Session) -> HttpResponse {
+    let ok = session.remove("quiz");
 
-    let result = Question::delete(&mut con, item_id.into_inner());
-
-    if result.is_ok() {
-        HttpResponse::Ok().finish()
-    } else {
-        HttpResponse::InternalServerError().finish()
+    if ok.is_some() {
+        return HttpResponse::Ok().finish();
     }
+
+    HttpResponse::InternalServerError().finish()
 }
 
 pub fn endpoints(scope: actix_web::Scope) -> actix_web::Scope {
