@@ -4,17 +4,18 @@ use crate::diesel::*;
 use crate::schema::*;
 use diesel::QueryResult;
 use serde::{Deserialize, Serialize};
-
+use crate::models::categories::Category;
 
 type Connection = create_rust_app::Connection;
 
 #[tsync::tsync]
-#[derive(Debug, Serialize, Deserialize, Clone, Queryable, Insertable, AsChangeset, Identifiable)]
-#[diesel(table_name=questions, primary_key(id))]
+#[derive(Debug, Serialize, Deserialize, Clone, Queryable, Insertable, AsChangeset, Identifiable, Associations)]
+#[diesel(table_name=questions, primary_key(id),belongs_to(Category, foreign_key=category_id))]
 pub struct Question {
     pub id: i32,
     pub question: String,
     pub answer: bool,
+    pub category_id: i32,
     pub created_at: chrono::NaiveDateTime,
     pub updated_at: chrono::NaiveDateTime,
 }
@@ -25,6 +26,7 @@ pub struct Question {
 pub struct QuestionForm {
     pub question: String,
     pub answer: bool,
+    pub category_id: i32,
 }
 
 #[tsync::tsync]
