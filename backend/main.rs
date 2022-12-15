@@ -1,6 +1,8 @@
-#[macro_use]
 extern crate diesel;
 
+use actix_session::storage::CookieSessionStore;
+use actix_session::SessionMiddleware;
+use actix_web::cookie::Key;
 use actix_web::middleware::{Compress, Logger, NormalizePath};
 use actix_web::web::Data;
 use actix_web::{web, App, HttpServer};
@@ -11,13 +13,19 @@ mod services;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let key = Key::generate();
     let app_data = create_rust_app::setup();
 
     HttpServer::new(move || {
         let mut app = App::new()
             .wrap(Compress::default())
             .wrap(NormalizePath::trim())
-            .wrap(Logger::default());
+            .wrap(Logger::default())
+            .wrap(
+                SessionMiddleware::builder(CookieSessionStore::default(), key.clone())
+                    .cookie_secure(false)
+                    .build(),
+            );
 
         app = app.app_data(Data::new(app_data.database.clone()));
         app = app.app_data(Data::new(app_data.mailer.clone()));
@@ -25,7 +33,8 @@ async fn main() -> std::io::Result<()> {
         let mut api_scope = web::scope("/api");
         api_scope = api_scope
             .service(services::todo::endpoints(web::scope("/todos")))
-            .service(services::quiz::endpoints(web::scope("/quiz")));
+            .service(services::quiz::endpoints(web::scope("/quiz")))
+            .service(services::categories::endpoints(web::scope("/categories")));
 
         #[cfg(debug_assertions)]
         { /* Development-only routes */ }
