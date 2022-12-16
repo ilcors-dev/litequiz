@@ -1,9 +1,9 @@
-use crate::models::questions::{types::WithHiddenAnswer, Question, QuestionForm};
+use crate::models::questions::{types::WithHiddenAnswer, Question};
 use actix_session::Session;
 use actix_web::{
-    delete, get, post, put,
-    web::{Data, Json, Path, Query},
-    Error, HttpResponse, Result,
+    get,
+    web::{Data, Path, Query},
+    HttpResponse,
 };
 use create_rust_app::Database;
 use diesel::{associations::HasTable, prelude::*};
@@ -83,48 +83,6 @@ async fn read(db: Data<Database>, item_id: Path<i32>) -> HttpResponse {
     }
 }
 
-#[post("")]
-async fn create(db: Data<Database>, Json(item): Json<QuestionForm>) -> Result<HttpResponse, Error> {
-    let mut con = db.get_connection();
-
-    let result = Question::create(&mut con, &item).expect("Creation error");
-
-    Ok(HttpResponse::Created().json(result))
-}
-
-#[put("/{id}")]
-async fn update(
-    db: Data<Database>,
-    item_id: Path<i32>,
-    Json(item): Json<QuestionForm>,
-) -> HttpResponse {
-    let mut con = db.get_connection();
-
-    let result = Question::update(&mut con, item_id.into_inner(), &item);
-
-    if result.is_ok() {
-        HttpResponse::Ok().finish()
-    } else {
-        HttpResponse::InternalServerError().finish()
-    }
-}
-
-#[delete("")]
-async fn destroy(session: Session) -> HttpResponse {
-    let ok = session.remove("quiz");
-
-    if ok.is_some() {
-        return HttpResponse::Ok().finish();
-    }
-
-    HttpResponse::InternalServerError().finish()
-}
-
 pub fn endpoints(scope: actix_web::Scope) -> actix_web::Scope {
-    return scope
-        .service(index)
-        .service(read)
-        .service(create)
-        .service(update)
-        .service(destroy);
+    return scope.service(index).service(read);
 }

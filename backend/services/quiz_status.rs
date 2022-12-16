@@ -1,5 +1,9 @@
 use actix_session::Session;
-use actix_web::{get, web::Data, HttpResponse};
+use actix_web::{
+    delete, get, post,
+    web::{self, Data, Json},
+    HttpResponse,
+};
 use create_rust_app::Database;
 
 use crate::models::categories::Category;
@@ -11,8 +15,15 @@ pub struct QuizStatus {
     pub active: bool,
 }
 
-#[get("")]
-async fn index(db: Data<Database>, session: Session) -> HttpResponse {
+#[tsync::tsync]
+#[derive(serde::Deserialize, serde::Serialize)]
+pub struct QuizAnswer {
+    pub question_id: i32,
+    pub answer: Option<bool>,
+}
+
+#[get("is-active")]
+async fn is_active(db: Data<Database>, session: Session) -> HttpResponse {
     let mut con = db.get_connection();
     let active = session.get::<Vec<i32>>("quiz").unwrap().is_some();
 
@@ -37,6 +48,37 @@ async fn index(db: Data<Database>, session: Session) -> HttpResponse {
     })
 }
 
+#[get("")]
+async fn index(session: Session) -> HttpResponse {
+    let answers = session.get::<Vec<QuizAnswer>>("answers").unwrap();
+
+    return HttpResponse::Ok().json(answers);
+}
+
+#[post("")]
+async fn store(session: Session, answers: Json<Vec<QuizAnswer>>) -> HttpResponse {
+    if session.insert("answers", answers.into_inner()).is_err() {
+        return HttpResponse::InternalServerError().finish();
+    }
+
+    return HttpResponse::Ok().finish();
+}
+
+#[delete("")]
+async fn destroy(session: Session) -> HttpResponse {
+    let quiz = vec!["answers", "quiz", "quiz_category_id"];
+
+    quiz.iter().for_each(|key| {
+        session.remove(key);
+    });
+
+    HttpResponse::InternalServerError().finish()
+}
+
 pub fn endpoints(scope: actix_web::Scope) -> actix_web::Scope {
-    return scope.service(index);
+    return scope
+        .service(is_active)
+        .service(index)
+        .service(store)
+        .service(destroy);
 }

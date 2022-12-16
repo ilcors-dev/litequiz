@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Home } from './containers/Home';
 import { Quiz } from './containers/Quiz';
+import { QuizResult } from './containers/QuizResult';
 import { QuizStarter } from './containers/QuizStarter';
 import { Todos } from './containers/Todo';
 import './index.css';
@@ -17,6 +18,7 @@ const App = () => {
 					<Route path="/home" element={<Home />} />
 					<Route path="/todos" element={<Todos />} />
 					<Route path=":categoryId/quiz" element={<Quiz />} />
+					<Route path="/quiz-result" element={<QuizResult />} />
 					{/* CRA: routes */}
 				</Routes>
 			</div>

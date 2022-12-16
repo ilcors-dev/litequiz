@@ -11,7 +11,7 @@ html {
 }
 
 .brutal-btn {
-	@apply brutal-border py-1 px-3 hover:bg-yellow-300;
+	@apply brutal-border cursor-pointer py-1 px-3 hover:bg-yellow-300;
 }
 
 .ReactModal__Content {

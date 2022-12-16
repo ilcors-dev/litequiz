@@ -49,6 +49,12 @@ interface WithHiddenAnswer {
   question: string
 }
 
+interface WithAnswer {
+  id: number
+  question: string
+  answer: boolean
+}
+
 interface Todo {
   id: number
   text: string
@@ -80,6 +86,21 @@ interface QuizStarterParams {
 interface QuizStatus {
   category?: Category
   active: boolean
+}
+
+interface QuizAnswer {
+  question_id: number
+  answer?: boolean
+}
+
+interface QuizSubmission {
+  category_id: number
+  given_answers: Array<QuizAnswer>
+  correct_answers: Array<QuizAnswer>
+  correct_answers_count: number
+  total_questions: number
+  correct_answers_percentage: string
+  questions: Array<WithAnswer>
 }
 
 interface PaginationParams {
