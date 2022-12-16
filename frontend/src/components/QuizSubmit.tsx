@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
-import { useQuizSubmissionApi } from '../apis/useQuizSubmissionApi';
+import { useQuizSolutionApi } from '../apis/useQuizSolutionApi';
 
 ReactModal.setAppElement('#root');
 
@@ -23,7 +23,6 @@ export const QuizSubmit = ({ answers }: Props) => {
 	const [openModal, setOpenModal] = useState(false);
 
 	const submit = async () => {
-		await useQuizSubmissionApi().post(answers);
 		window.location.href = '/quiz-result';
 	};
 

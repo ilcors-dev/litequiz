@@ -1,46 +1,36 @@
-use crate::models::questions::types::WithAnswer;
+use std::vec;
+
 use crate::{models::questions::Question, services::quiz_status::QuizAnswer};
 use actix_session::Session;
 use actix_web::web::Data;
-use actix_web::{get, post, web::Json, HttpResponse};
+use actix_web::{get, web::Json, HttpResponse};
 use create_rust_app::Database;
 use diesel::associations::HasTable;
 use diesel::prelude::*;
 
 #[tsync::tsync]
-#[derive(serde::Deserialize, serde::Serialize)]
-pub struct QuizSubmission {
+#[derive(serde::Deserialize, serde::Serialize, Clone)]
+pub struct QuizSolution {
     pub category_id: i32,
     pub given_answers: Vec<QuizAnswer>,
     pub correct_answers: Vec<QuizAnswer>,
     pub correct_answers_count: i32,
     pub total_questions: i32,
     pub correct_answers_percentage: String,
-    pub questions: Vec<WithAnswer>,
+    pub questions: Vec<Question>,
 }
 
 #[get("")]
-async fn get(session: Session) -> HttpResponse {
-    let last_quiz = session.get::<QuizSubmission>("last_quiz_result").unwrap();
-
-    return HttpResponse::Ok().json(last_quiz);
-}
-
-#[post("")]
-async fn store(
-    db: Data<Database>,
-    session: Session,
-    answers: Json<Vec<QuizAnswer>>,
-) -> HttpResponse {
+async fn get(db: Data<Database>, session: Session) -> HttpResponse {
     use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
-    let _answers = answers.into_inner();
+    let answers = session.get::<Vec<QuizAnswer>>("answers").unwrap().unwrap();
 
     let quiz_ids = session.get::<Vec<i32>>("quiz").unwrap();
 
     let query = questions::table()
-        .filter(id.eq_any(quiz_ids.unwrap()))
+        .filter(id.eq_any(quiz_ids.clone().unwrap()))
         .load::<Question>(&mut con);
 
     if query.is_err() {
@@ -50,22 +40,14 @@ async fn store(
     let q = query.unwrap();
 
     // create the result object
-    let mut result = QuizSubmission {
+    let mut result = QuizSolution {
         category_id: session.get::<i32>("quiz_category_id").unwrap().unwrap(),
-        given_answers: _answers,
+        given_answers: answers,
         correct_answers: vec![],
         correct_answers_count: 0,
         total_questions: q.len() as i32,
         correct_answers_percentage: "0".to_string(),
-        questions: q
-            .clone()
-            .into_iter()
-            .map(|q| WithAnswer {
-                id: q.id,
-                question: q.question,
-                answer: q.answer,
-            })
-            .collect(),
+        questions: q.clone(),
     };
 
     // loop through the questions and check if the answer is correct, if so add it to the correct_answers array
@@ -88,17 +70,14 @@ async fn store(
         }
     }
 
-    // calculate the percentage
-    let perc = (result.correct_answers_count as f32 / result.total_questions as f32) * 100.0;
-    result.correct_answers_percentage = format!("{:.2}", perc);
+    result.correct_answers_percentage = format!(
+        "{:.2}",
+        (result.correct_answers_count as f32 / result.total_questions as f32) * 100.0
+    );
 
-    session
-        .insert("last_quiz_result", result)
-        .expect("Failed to insert quiz result into session!");
-
-    return HttpResponse::Ok().json(true);
+    return HttpResponse::Ok().json(result);
 }
 
 pub fn endpoints(scope: actix_web::Scope) -> actix_web::Scope {
-    return scope.service(get).service(store);
+    return scope.service(get);
 }

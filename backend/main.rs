@@ -36,8 +36,8 @@ async fn main() -> std::io::Result<()> {
             .service(services::categories::endpoints(web::scope("/categories")))
             .service(services::quiz::endpoints(web::scope("/quiz")))
             .service(services::quiz_status::endpoints(web::scope("/quiz-status")))
-            .service(services::quiz_submission::endpoints(web::scope(
-                "/quiz-submission",
+            .service(services::quiz_solution::endpoints(web::scope(
+                "/quiz-solution",
             )));
 
         #[cfg(debug_assertions)]

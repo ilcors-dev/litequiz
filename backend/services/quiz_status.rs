@@ -1,7 +1,7 @@
 use actix_session::Session;
 use actix_web::{
     delete, get, post,
-    web::{self, Data, Json},
+    web::{Data, Json},
     HttpResponse,
 };
 use create_rust_app::Database;
@@ -16,7 +16,7 @@ pub struct QuizStatus {
 }
 
 #[tsync::tsync]
-#[derive(serde::Deserialize, serde::Serialize)]
+#[derive(serde::Deserialize, serde::Serialize, Clone)]
 pub struct QuizAnswer {
     pub question_id: i32,
     pub answer: Option<bool>,

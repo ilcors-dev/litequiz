@@ -83,6 +83,16 @@ interface QuizStarterParams {
   category_id: number
 }
 
+interface QuizSolution {
+  category_id: number
+  given_answers: Array<QuizAnswer>
+  correct_answers: Array<QuizAnswer>
+  correct_answers_count: number
+  total_questions: number
+  correct_answers_percentage: string
+  questions: Array<Question>
+}
+
 interface QuizStatus {
   category?: Category
   active: boolean
@@ -91,16 +101,6 @@ interface QuizStatus {
 interface QuizAnswer {
   question_id: number
   answer?: boolean
-}
-
-interface QuizSubmission {
-  category_id: number
-  given_answers: Array<QuizAnswer>
-  correct_answers: Array<QuizAnswer>
-  correct_answers_count: number
-  total_questions: number
-  correct_answers_percentage: string
-  questions: Array<WithAnswer>
 }
 
 interface PaginationParams {
