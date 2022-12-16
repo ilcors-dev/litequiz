@@ -18,7 +18,9 @@ export const QuizRowResult = ({
 	const style = (config: { shouldBe: boolean }) => {
 		// not answered
 		if (givenAnswer === undefined || givenAnswer === null) {
-			return 'bg-white';
+			if (correctAnswer === config.shouldBe) {
+				return 'bg-gray-300 brutal-btn';
+			}
 		}
 
 		// correct answer
