@@ -1,36 +1,56 @@
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { redirect, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import { useMutation, useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { useCategoryApi } from '../apis/useCategoryApi';
 import { useQuizApi } from '../apis/useQuizApi';
+import { useQuizStatusApi } from '../apis/useQuizStatusApi';
+import { QuizDestroy } from '../components/QuizDestroy';
 import { QuizRow } from '../components/QuizRow';
-import Modal from 'react-modal';
-
-Modal.setAppElement('#root');
-
-const customStyles = {
-	content: {
-		top: '50%',
-		left: '50%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)',
-	},
-};
+import { QuizSubmit } from '../components/QuizSubmit';
 
 export const Quiz = () => {
 	const { categoryId } = useParams();
-	const [deleteQuizModalOpen, setDeleteQuizModalOpen] = useState(false);
+	const [answers, setAnswers] = useState<QuizAnswer[]>([]);
 
 	if (!categoryId) {
 		return null;
 	}
 
-	const deleteQuiz = async () => {
-		await useQuizApi().destroy();
-		window.location.href = '/';
+	const status = useQuery('status', useQuizStatusApi().get, {
+		onSuccess(data) {
+			setAnswers(data);
+		},
+	});
+	const saveStatus = useMutation(() =>
+		useQuizStatusApi().post(
+			answers?.filter((a) => a.answer !== undefined) ?? []
+		)
+	);
+
+	const handleAnswerToggle = (answer: QuizAnswer) => {
+		if (answer.answer === null) {
+			const newAnswers = answers.filter(
+				(a) => a.question_id !== answer.question_id
+			);
+			setAnswers(newAnswers);
+			return;
+		}
+
+		const index = answers.findIndex(
+			(a) => a.question_id === answer.question_id
+		);
+
+		if (index === -1) {
+			setAnswers([...answers, answer]);
+		} else {
+			const newAnswers = [...answers];
+			newAnswers[index] = answer;
+			setAnswers(newAnswers);
+		}
 	};
+
+	useEffect(saveStatus.mutate, [answers]);
 
 	const category = useQuery('category', () =>
 		useCategoryApi().show(+categoryId)
@@ -40,53 +60,27 @@ export const Quiz = () => {
 
 	return (
 		<div className="">
-			<div className="flex items-end space-x-4">
+			<div className="sticky top-0 z-10 flex items-end space-x-4 bg-white py-4">
 				<h1 className="text-4xl font-bold">Quiz {category.data?.name}</h1>
-				<button
-					className="brutal-btn"
-					onClick={() => setDeleteQuizModalOpen(true)}
-				>
-					<span>🗑️</span>
-				</button>
+				<QuizDestroy />
+				<span className="brutal-btn">
+					{answers?.filter((a) => a.answer !== undefined).length ?? 0}/
+					{questions.data?.length}
+				</span>
+				<QuizSubmit answers={answers} />
 			</div>
 			<ol className="">
 				{questions.data?.map((q, i) => (
-					<QuizRow q={q} i={i} key={i} className="my-5" />
+					<QuizRow
+						q={q}
+						i={i}
+						key={i}
+						className="my-5"
+						state={status.data?.find((a) => a.question_id === q.id)}
+						set={handleAnswerToggle}
+					/>
 				))}
 			</ol>
-			<Modal
-				isOpen={deleteQuizModalOpen}
-				contentLabel="Example Modal"
-				style={customStyles}
-				shouldCloseOnEsc={true}
-				onRequestClose={() => setDeleteQuizModalOpen(false)}
-				closeTimeoutMS={250}
-			>
-				<div className="w-[35vw]">
-					<div className="relative flex justify-between space-x-8">
-						<h1 className="text-2xl font-bold">Delete Quiz?</h1>
-						<button
-							className="absolute -top-1 -right-1"
-							onClick={() => setDeleteQuizModalOpen(false)}
-						>
-							❌
-						</button>
-					</div>
-					<div className="mt-4">
-						<div className="flex justify-center space-x-8">
-							<button
-								className="brutal-btn"
-								onClick={() => setDeleteQuizModalOpen(false)}
-							>
-								<span className="px-2">🙅</span>
-							</button>
-							<button className="brutal-btn" onClick={deleteQuiz}>
-								<span className="px-2">👍</span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</Modal>
 		</div>
 	);
 };
