@@ -15,7 +15,12 @@ const customStyles = {
 	},
 };
 
-export const QuizDestroy = () => {
+interface Props {
+	btnIcon?: string;
+	popupMessage?: string;
+}
+
+export const QuizDestroy = ({ btnIcon, popupMessage }: Props) => {
 	const [openModal, setOpenModal] = useState(false);
 
 	const deleteQuiz = async () => {
@@ -26,11 +31,11 @@ export const QuizDestroy = () => {
 	return (
 		<>
 			<button className="brutal-btn" onClick={() => setOpenModal(true)}>
-				<span>🗑️</span>
+				<span>{btnIcon ?? '🗑️'}</span>
 			</button>
 			<ReactModal
 				isOpen={openModal}
-				contentLabel="Delete quiz?"
+				contentLabel={popupMessage ?? 'Delete Quiz?'}
 				style={customStyles}
 				shouldCloseOnEsc={true}
 				onRequestClose={() => setOpenModal(false)}
@@ -38,7 +43,9 @@ export const QuizDestroy = () => {
 			>
 				<div className="w-[35vw]">
 					<div className="relative flex justify-between space-x-8">
-						<h1 className="text-2xl font-bold">Delete Quiz?</h1>
+						<h1 className="text-2xl font-bold">
+							{popupMessage ?? 'Delete Quiz?'}
+						</h1>
 						<button
 							className="absolute -top-1 -right-1"
 							onClick={() => setOpenModal(false)}
