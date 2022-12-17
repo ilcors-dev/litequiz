@@ -7,7 +7,7 @@ use actix_web::{
 };
 use create_rust_app::Database;
 use diesel::{associations::HasTable, prelude::*};
-use rand::{seq::SliceRandom, thread_rng};
+use rand::{thread_rng, Rng};
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
@@ -28,30 +28,44 @@ async fn index(
     let quiz_ids = session.get::<Vec<i32>>("quiz").unwrap();
     let has_quiz = quiz_ids.is_some();
 
-    let mut query = questions::table().into_boxed();
+    let query = questions::table()
+        .filter(category_id.eq(info.category_id))
+        .select((id, question))
+        .into_boxed();
 
     // if so we should return always the same questions saved in the session
     if has_quiz {
-        query = query.filter(id.eq_any(quiz_ids.unwrap()));
+        let result = query
+            .filter(id.eq_any(quiz_ids.unwrap()))
+            .load::<WithHiddenAnswer>(&mut con);
+
+        return HttpResponse::Ok().json(result.unwrap());
     }
 
-    let result = query
-        .filter(category_id.eq(info.category_id))
-        .select((id, question))
-        .load::<WithHiddenAnswer>(&mut con);
+    let result = query.load::<WithHiddenAnswer>(&mut con);
 
     if result.is_ok() {
-        let mut items: Vec<WithHiddenAnswer> = result.unwrap();
+        let q: Vec<WithHiddenAnswer> = result.unwrap();
+        let mut items: Vec<WithHiddenAnswer> = Vec::new();
 
-        // if the quiz is not active we should shuffle the questions and save them in the session, otherwise keep them
+        // if the quiz is not active we should shuffle the q and save them in the session, otherwise keep them
         // as they are
         if !has_quiz {
-            items.shuffle(&mut thread_rng());
+            loop {
+                if items.len() == 40 {
+                    break;
+                }
 
-            items = items
-                .into_iter()
-                .take(40 as usize)
-                .collect::<Vec<WithHiddenAnswer>>();
+                let item = q.get(thread_rng().gen_range(0..q.len())).unwrap();
+
+                let is_dup = items
+                    .iter()
+                    .any(|i| i.id == item.id || i.question == item.question);
+
+                if !is_dup {
+                    items.push(item.clone());
+                }
+            }
 
             session
                 .insert("quiz_category_id", info.category_id)

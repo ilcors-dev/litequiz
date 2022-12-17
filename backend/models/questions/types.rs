@@ -2,7 +2,7 @@ use crate::diesel::*;
 use serde::{Deserialize, Serialize};
 
 #[tsync::tsync]
-#[derive(Queryable, Serialize)]
+#[derive(Queryable, Serialize, Clone)]
 pub struct WithHiddenAnswer {
     pub id: i32,
     pub question: String,
