@@ -29,7 +29,7 @@ export const QuizRowResult = ({
 		}
 
 		// wrong answer
-		if (givenAnswer !== config.shouldBe && correctAnswer === config.shouldBe) {
+		if (correctAnswer !== config.shouldBe && givenAnswer === config.shouldBe) {
 			return 'brutal-btn bg-red-300';
 		}
 	};
