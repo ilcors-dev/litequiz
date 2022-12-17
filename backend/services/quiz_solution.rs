@@ -3,10 +3,14 @@ use std::vec;
 use crate::{models::questions::Question, services::quiz_status::QuizAnswer};
 use actix_session::Session;
 use actix_web::web::Data;
-use actix_web::{get, web::Json, HttpResponse};
+use actix_web::{get, HttpResponse};
 use create_rust_app::Database;
 use diesel::associations::HasTable;
 use diesel::prelude::*;
+
+const CORRECT_ANSWER: f32 = 0.85;
+const WRONG_ANSWER: f32 = 0.64;
+const MAX: u8 = 30;
 
 #[tsync::tsync]
 #[derive(serde::Deserialize, serde::Serialize, Clone)]
@@ -18,6 +22,8 @@ pub struct QuizSolution {
     pub total_questions: i32,
     pub correct_answers_percentage: String,
     pub questions: Vec<Question>,
+    pub score: String,
+    pub max_score: u8,
 }
 
 #[get("")]
@@ -48,6 +54,8 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
         total_questions: q.len() as i32,
         correct_answers_percentage: "0".to_string(),
         questions: q.clone(),
+        score: "0".to_string(),
+        max_score: MAX,
     };
 
     // loop through the questions and check if the answer is correct, if so add it to the correct_answers array
@@ -73,6 +81,12 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
     result.correct_answers_percentage = format!(
         "{:.2}",
         (result.correct_answers_count as f32 / result.total_questions as f32) * 100.0
+    );
+
+    result.score = format!(
+        "{:.2}",
+        result.correct_answers_count as f32 * CORRECT_ANSWER
+            - ((result.total_questions - result.correct_answers_count) as f32 * WRONG_ANSWER)
     );
 
     return HttpResponse::Ok().json(result);

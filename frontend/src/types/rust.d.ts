@@ -91,6 +91,8 @@ interface QuizSolution {
   total_questions: number
   correct_answers_percentage: string
   questions: Array<Question>
+  score: string
+  max_score: number
 }
 
 interface QuizStatus {

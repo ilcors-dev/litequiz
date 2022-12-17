@@ -26,6 +26,14 @@ export const QuizResult = () => {
 						<span>&nbsp;({solution.data?.correct_answers_percentage}%)</span>
 					</span>
 				</div>
+				<div className="flex justify-between">
+					<span className="col-span-4">Voto finale</span>
+					<span className="col-span-8 text-xl font-semibold">
+						<span>
+							{solution.data?.score}/{solution.data?.max_score}
+						</span>
+					</span>
+				</div>
 			</div>
 			<div>
 				<ol className="mt-10">
