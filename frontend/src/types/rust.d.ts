@@ -74,9 +74,10 @@ interface PaginationResult<T> {
   num_pages: number
 }
 
-interface PaginationParams {
-  page: number
-  page_size: number
+interface CategoryWithQuestionCount {
+  id: number
+  name: string
+  question_count: number
 }
 
 interface QuizStarterParams {

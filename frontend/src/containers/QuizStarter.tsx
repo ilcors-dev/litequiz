@@ -31,7 +31,7 @@ export const QuizStarter = () => {
 					>
 						{categories.data?.map((c) => (
 							<option value={c.id} key={c.id}>
-								{c.name}
+								{c.name} ({c.question_count})
 							</option>
 						))}
 					</select>

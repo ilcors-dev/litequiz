@@ -4,20 +4,24 @@ use actix_web::{
     HttpResponse,
 };
 use create_rust_app::Database;
-use diesel::{associations::HasTable, RunQueryDsl};
+use diesel::{associations::HasTable, QueryDsl, RunQueryDsl};
 
+use crate::diesel::ExpressionMethods;
 use crate::models::categories::Category;
 
 #[tsync::tsync]
-#[derive(serde::Deserialize)]
-pub struct PaginationParams {
-    pub page: i64,
-    pub page_size: i64,
+#[derive(serde::Deserialize, serde::Serialize, Clone)]
+pub struct CategoryWithQuestionCount {
+    pub id: i32,
+    pub name: String,
+    pub question_count: i64,
 }
 
 #[get("")]
 async fn index(db: Data<Database>) -> HttpResponse {
     use crate::schema::categories::dsl::*;
+    use crate::schema::questions::dsl::*;
+
     let mut con = db.get_connection();
 
     let cat = categories::table().load::<Category>(&mut con);
@@ -26,7 +30,24 @@ async fn index(db: Data<Database>) -> HttpResponse {
         return HttpResponse::InternalServerError().finish();
     }
 
-    return HttpResponse::Ok().json(cat.unwrap());
+    let mut result: Vec<CategoryWithQuestionCount> = Vec::new();
+
+    for c in cat.unwrap() {
+        let count = questions::table()
+            .into_boxed()
+            .filter(category_id.eq(c.id))
+            .count()
+            .get_result::<i64>(&mut con)
+            .unwrap();
+
+        result.push(CategoryWithQuestionCount {
+            id: c.id,
+            name: c.name,
+            question_count: count,
+        });
+    }
+
+    return HttpResponse::Ok().json(result);
 }
 
 #[get("/{id}")]
