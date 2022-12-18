@@ -1,72 +1,19 @@
-# Getting Started with Create Rust App
+# Litequiz
 
-This project was bootstrapped with [Create Rust App](https://github.com/wulf/create-rust-app).
+Simple quiz application, built principally for learning purposes regarding Rust (Actix, DieselRs), React (Typescript), Tailwindcss and SQLite3.
 
-## Requirements
+## Database
 
-- [stable Rust](https://www.rust-lang.org/tools/install)
-- Diesel CLI 
-  - if using postgres, `cargo install diesel_cli --no-default-features --features postgres`
-  - if using sqlite, `cargo install diesel_cli --no-default-features --features sqlite-bundled`
-- cargo-watch to recompile on change:
-  - `cargo install cargo-watch` (allows running `cargo watch -x run -i frontend/` for continuous compilation; see "available scripts")
+The database has been populated with questions for 2 unibo exams:
+- [Laboratorio Di Amministrazione Di Sistemi T](https://www.unibo.it/it/didattica/insegnamenti/insegnamento/2021/434713)
 
-## Notes
+- [Laboratorio Di Sicurezza Informatica T](https://www.unibo.it/it/didattica/insegnamenti/insegnamento/2022/487362)
 
-- In development, the `.env` file is read (use `.env.example` for reference)
-- In production, environment variables are sourced directly
+Feel free to wipe the database and add your own questions.
+As for now you will need to manually insert them.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `cargo fullstack`
-
-Runs the app in development mode and watches for changes. Visit [http://localhost:3000](http://localhost:3000) to view it.
-
-Any frontend changes should instantly appear. Backend changes will need to recompile.
-Needs `cargo-watch` installed, see requirements.
-
-To test/debug issues with the production build, set the `debug-assertions` to `true` for `[profile.dev]` in `Cargo.toml`. This way, development-only code paths are discarded and instead, production-only code paths are included.
-
-Alternatively, use `cargo run` to run the app in development mode without watching for file changes.
-
-### `cargo build`
-
-Builds a production-ready build.
-
-### `cargo tsync`
-
-Generates the typescript types from rust code marked with [`tsync`](https://github.com/Wulf/tsync).
-Outputs to `frontend/src/types/rust.d.ts`.
-
-### Running frontend and backend individually
-
-```sh
-# frontend
-cd frontend && yarn && yarn start
-```
-
-```sh
-# backend
-cargo watch -x run -i frontend/
-```
-
-## Database Migrations
-
-- `diesel migration generate <migration_name>`
-- `diesel migration run`
-- `diesel migration revert`
-
-- `diesel database setup`
-- `diesel database reset`
-
-
-# Containerize your application
-      
-## Building a container
-`docker build -t image-name .`
-
-## Running the container
-`docker run -e SECRET_KEY=123 -e DATABASE_URL=postgres://postgres:postgres@localhost/database -p 3000:3000 image-name`
-
+## How to run
+1. Install [stable Rust](https://www.rust-lang.org/tools/install)
+2. Clone the repository
+3. Run `cargo fullstack` in the root folder
+4. You're good to go 🫡
