@@ -6,15 +6,13 @@ const api = {
 		return await (await fetch('/api/quiz-status')).json();
 	},
 	post: async (status: QuizAnswer[]) => {
-		await (
-			await fetch('/api/quiz-status', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(status),
-			})
-		).json();
+		await fetch('/api/quiz-status', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(status),
+		});
 	},
 	destroy: async () => {
 		await fetch(`/api/quiz-status`, {
