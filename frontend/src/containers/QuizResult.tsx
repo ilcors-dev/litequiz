@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import { useQuizSolutionApi } from '../apis/useQuizSolutionApi';
 import { QuizDestroy } from '../components/QuizDestroy';
@@ -8,6 +9,9 @@ export const QuizResult = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Quiz Results</title>
+			</Helmet>
 			<div className="sticky top-0 z-10 bg-white py-4">
 				<div className="flex items-end space-x-4 bg-white py-4">
 					<h1 className="text-4xl font-bold">Last quiz results</h1>

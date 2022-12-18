@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Modal from 'react-modal';
+import { Helmet } from 'react-helmet';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useCategoryApi } from '../apis/useCategoryApi';
@@ -60,6 +60,13 @@ export const Quiz = () => {
 
 	return (
 		<div className="">
+			<Helmet>
+				<title>
+					Quiz {`${category.data?.name}`} (
+					{`${answers?.filter((a) => a.answer !== undefined).length ?? 0}`}/
+					{`${questions.data?.length}`})
+				</title>
+			</Helmet>
 			<div className="sticky top-0 z-10 flex items-end space-x-4 bg-white py-4">
 				<h1 className="text-4xl font-bold">Quiz {category.data?.name}</h1>
 				<QuizDestroy />

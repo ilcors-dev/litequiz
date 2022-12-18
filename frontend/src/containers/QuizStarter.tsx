@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import { useCategoryApi } from '../apis/useCategoryApi';
 import { useQuizStatusApi } from '../apis/useQuizStatusApi';
@@ -15,6 +16,9 @@ export const QuizStarter = () => {
 
 	return (
 		<div className="my-20 flex flex-col items-center justify-center">
+			<Helmet>
+				<title>Start Quiz</title>
+			</Helmet>
 			<div className="brutal-border inline-flex flex-col items-center space-y-6 p-20">
 				<h1 className="text-4xl font-bold">Quiz</h1>
 				<p className="text-xl">Click the button to start the quiz</p>
