@@ -1,7 +1,7 @@
-CREATE TABLE questions (
+CREATE TABLE category_score_settings (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    question TEXT NOT NULL,
-    answer BOOLEAN,
+    answer_type TEXT NOT NULL,
+    score DECIMAL(6, 2) NOT NULL,
     category_id INTEGER NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

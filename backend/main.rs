@@ -34,6 +34,9 @@ async fn main() -> std::io::Result<()> {
         api_scope = api_scope
             .service(services::todo::endpoints(web::scope("/todos")))
             .service(services::categories::endpoints(web::scope("/categories")))
+            .service(services::category_score_settings::endpoints(web::scope(
+                "/category-score-settings",
+            )))
             .service(services::quiz::endpoints(web::scope("/quiz")))
             .service(services::quiz_status::endpoints(web::scope("/quiz-status")))
             .service(services::quiz_solution::endpoints(web::scope(

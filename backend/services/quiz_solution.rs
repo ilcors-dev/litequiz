@@ -1,5 +1,6 @@
 use std::vec;
 
+use crate::models::category_score_settings::extend::get_category_scores;
 use crate::{models::questions::Question, services::quiz_status::QuizAnswer};
 use actix_session::Session;
 use actix_web::web::Data;
@@ -8,8 +9,8 @@ use create_rust_app::Database;
 use diesel::associations::HasTable;
 use diesel::prelude::*;
 
-const CORRECT_ANSWER: f32 = 0.85;
-const WRONG_ANSWER: f32 = 0.64;
+// const CORRECT_ANSWER: f32 = 0.85;
+// const WRONG_ANSWER: f32 = 0.64;
 const MAX: u8 = 30;
 
 #[tsync::tsync]
@@ -45,9 +46,11 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
 
     let q = query.unwrap();
 
+    let cat_id = session.get::<i32>("quiz_category_id").unwrap().unwrap();
+
     // create the result object
     let mut result = QuizSolution {
-        category_id: session.get::<i32>("quiz_category_id").unwrap().unwrap(),
+        category_id: cat_id,
         given_answers: answers,
         correct_answers: vec![],
         correct_answers_count: 0,
@@ -69,11 +72,11 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
             continue;
         }
 
-        if ans.unwrap().answer.unwrap() == quest.answer {
+        if ans.unwrap().answer.unwrap() == quest.answer.unwrap() {
             result.correct_answers_count += 1;
             result.correct_answers.push(QuizAnswer {
                 question_id: quest.id,
-                answer: Some(quest.answer),
+                answer: quest.answer,
             });
         }
     }
@@ -83,10 +86,13 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
         (result.correct_answers_count as f32 / result.total_questions as f32) * 100.0
     );
 
+    let score = get_category_scores(db, cat_id).unwrap();
+
     result.score = format!(
         "{:.2}",
-        result.correct_answers_count as f32 * CORRECT_ANSWER
-            - ((result.total_questions - result.correct_answers_count) as f32 * WRONG_ANSWER)
+        result.correct_answers_count as f32 * (score.correct_answer as f32)
+            - ((result.given_answers.len() as i32 - result.correct_answers_count) as f32
+                * (score.wrong_answer as f32))
     );
 
     return HttpResponse::Ok().json(result);

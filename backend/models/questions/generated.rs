@@ -14,7 +14,7 @@ type Connection = create_rust_app::Connection;
 pub struct Question {
     pub id: i32,
     pub question: String,
-    pub answer: bool,
+    pub answer: Option<bool>,
     pub category_id: i32,
     pub created_at: chrono::NaiveDateTime,
     pub updated_at: chrono::NaiveDateTime,
@@ -25,7 +25,7 @@ pub struct Question {
 #[diesel(table_name=questions)]
 pub struct QuestionForm {
     pub question: String,
-    pub answer: bool,
+    pub answer: Option<bool>,
     pub category_id: i32,
 }
 

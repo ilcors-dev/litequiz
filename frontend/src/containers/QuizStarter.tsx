@@ -39,6 +39,7 @@ export const QuizStarter = () => {
 							</option>
 						))}
 					</select>
+					<a href={`/category-score-settings/${selected}`}>⚙️</a>
 				</div>
 			</div>
 		</div>

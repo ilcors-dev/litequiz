@@ -20,10 +20,34 @@ interface PaginationResult<T> {
   num_pages: number
 }
 
+interface CategoryScoreSetting {
+  id: number
+  answer_type: string
+  score: number
+  category_id: number
+  created_at: Date
+  updated_at: Date
+}
+
+interface CategoryScoreSettingForm {
+  answer_type: string
+  score: number
+  category_id: number
+}
+
+interface PaginationResult<T> {
+  items: Array<T>
+  total_items: number
+  /** 0-based index */
+  page: number
+  page_size: number
+  num_pages: number
+}
+
 interface Question {
   id: number
   question: string
-  answer: boolean
+  answer?: boolean
   category_id: number
   created_at: Date
   updated_at: Date
@@ -31,7 +55,7 @@ interface Question {
 
 interface QuestionForm {
   question: string
-  answer: boolean
+  answer?: boolean
   category_id: number
 }
 
