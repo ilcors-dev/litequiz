@@ -29,6 +29,7 @@ pub struct QuizSolution {
 
 #[get("")]
 async fn get(db: Data<Database>, session: Session) -> HttpResponse {
+    println!("miao\n\n");
     use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
@@ -69,6 +70,11 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
             .find(|a| a.question_id == quest.id);
 
         if ans.is_none() {
+            continue;
+        }
+
+        // ! warning, there are some questions without an answer, those will be skipped
+        if quest.answer.is_none() {
             continue;
         }
 
