@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 pub struct WithHiddenAnswer {
     pub id: i32,
     pub question: String,
+    pub verified: bool,
 }
 
 #[tsync::tsync]

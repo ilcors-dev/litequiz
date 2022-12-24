@@ -16,6 +16,7 @@ pub struct Question {
     pub question: String,
     pub answer: Option<bool>,
     pub category_id: i32,
+    pub verified: bool,
     pub created_at: chrono::NaiveDateTime,
     pub updated_at: chrono::NaiveDateTime,
 }
@@ -27,6 +28,7 @@ pub struct QuestionForm {
     pub question: String,
     pub answer: Option<bool>,
     pub category_id: i32,
+    pub verified: bool,
 }
 
 #[tsync::tsync]

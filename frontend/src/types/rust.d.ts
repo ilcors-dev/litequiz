@@ -49,6 +49,7 @@ interface Question {
   question: string
   answer?: boolean
   category_id: number
+  verified: boolean
   created_at: Date
   updated_at: Date
 }
@@ -57,6 +58,7 @@ interface QuestionForm {
   question: string
   answer?: boolean
   category_id: number
+  verified: boolean
 }
 
 interface PaginationResult<T> {
@@ -71,6 +73,7 @@ interface PaginationResult<T> {
 interface WithHiddenAnswer {
   id: number
   question: string
+  verified: boolean
 }
 
 interface WithAnswer {

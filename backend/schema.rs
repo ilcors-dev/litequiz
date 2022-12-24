@@ -26,6 +26,7 @@ diesel::table! {
         question -> Text,
         answer -> Nullable<Bool>,
         category_id -> Integer,
+        verified -> Bool,
         created_at -> Timestamp,
         updated_at -> Timestamp,
     }

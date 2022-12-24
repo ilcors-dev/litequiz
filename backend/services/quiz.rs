@@ -30,7 +30,7 @@ async fn index(
 
     let query = questions::table()
         .filter(category_id.eq(info.category_id))
-        .select((id, question))
+        .select((id, question, verified))
         .into_boxed();
 
     // if so we should return always the same questions saved in the session
