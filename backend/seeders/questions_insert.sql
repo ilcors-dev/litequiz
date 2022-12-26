@@ -319,7 +319,7 @@ INSERT INTO questions (question, answer, category_id, verified) VALUES
     ("Gli algoritmi di cifratura a chiave privata utilizzano una chiave privata per cifrare i dati e una chiave pubblica per decifrarli.",0,2,0),
     ("La crittografia end-to-end protegge solo il contenuto di un messaggio durante il trasferimento tra due parti.",1,2,0),
     ("La crittografia a chiave pubblica è meno sicura della crittografia a chiave privata perché la chiave pubblica è generalmente condivisa con più persone.",0,2,0),
-    ("La crittografia a chiave simmetrica è più veloce della crittografia a chiave asimmetrica.",0,2,0),
+    ("La crittografia a chiave simmetrica è più veloce della crittografia a chiave asimmetrica.",1,2,0),
     ("La crittografia a chiave asimmetrica è meno sicura della crittografia a chiave simmetrica perché le chiavi sono generalmente più corte.",0,2,0),
     ("Gli algoritmi di cifratura a blocchi dividono il testo in blocchi di lunghezza fissa e cifrano ogni blocco separatamente.",1,2,0),
     ("Il sistema operativo Windows ha un firewall integrato per proteggere il computer da attacchi esterni",1,2,0),
