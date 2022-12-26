@@ -331,4 +331,4 @@ INSERT INTO questions (question, answer, category_id, verified) VALUES
     ("Gli hacker professionali non utilizzano mai virus o malware per compiere attacchi",0,2,0), 
     ("I firewall possono proteggere il computer da tutti gli attacchi",0,2,0), 
     ("L'intrusione di un utente non autorizzato in un sistema informatico è sempre il risultato di una vulnerabilità del sistema",0,2,0), 
-    ("I sistemi di rilevamento delle intrusioni possono solo rilevare attacchi in corso, ma non possono prevenirli",1,2,0);
+    ("I sistemi di rilevamento delle intrusioni possono solo rilevare attacchi in corso, ma non possono prevenirli",0,2,0);
