@@ -32,7 +32,6 @@ async fn main() -> std::io::Result<()> {
 
         let mut api_scope = web::scope("/api");
         api_scope = api_scope
-            .service(services::todo::endpoints(web::scope("/todos")))
             .service(services::categories::endpoints(web::scope("/categories")))
             .service(services::category_score_settings::endpoints(web::scope(
                 "/category-score-settings",
