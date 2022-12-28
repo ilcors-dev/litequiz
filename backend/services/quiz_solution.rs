@@ -29,7 +29,6 @@ pub struct QuizSolution {
 
 #[get("")]
 async fn get(db: Data<Database>, session: Session) -> HttpResponse {
-    println!("miao\n\n");
     use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
