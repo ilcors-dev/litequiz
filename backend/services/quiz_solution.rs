@@ -32,12 +32,21 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
     use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
-    let answers = session.get::<Vec<QuizAnswer>>("answers").unwrap().unwrap();
+    let answers: Vec<QuizAnswer>;
+    let quiz_ids: Vec<i32>;
 
-    let quiz_ids = session.get::<Vec<i32>>("quiz").unwrap();
+    match session.get::<Vec<QuizAnswer>>("answers").unwrap() {
+        None => return HttpResponse::InternalServerError().finish(),
+        Some(a) => answers = a,
+    }
+
+    match session.get::<Vec<i32>>("quiz").unwrap() {
+        None => return HttpResponse::InternalServerError().finish(),
+        Some(q) => quiz_ids = q,
+    }
 
     let query = questions::table()
-        .filter(id.eq_any(quiz_ids.clone().unwrap()))
+        .filter(id.eq_any(quiz_ids.clone()))
         .load::<Question>(&mut con);
 
     if query.is_err() {
