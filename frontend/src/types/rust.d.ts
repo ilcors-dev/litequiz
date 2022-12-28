@@ -3,12 +3,14 @@
 interface Category {
   id: number
   name: string
+  questions_per_quiz: number
   created_at: Date
   updated_at: Date
 }
 
 interface CategoryForm {
   name: string
+  questions_per_quiz: number
 }
 
 interface PaginationResult<T> {
@@ -82,25 +84,6 @@ interface WithAnswer {
   answer: boolean
 }
 
-interface Todo {
-  id: number
-  text: string
-  created_at: Date
-}
-
-interface TodoForm {
-  text: string
-}
-
-interface PaginationResult<T> {
-  items: Array<T>
-  total_items: number
-  /** 0-based index */
-  page: number
-  page_size: number
-  num_pages: number
-}
-
 interface CategoryWithQuestionCount {
   id: number
   name: string
@@ -131,9 +114,4 @@ interface QuizStatus {
 interface QuizAnswer {
   question_id: number
   answer?: boolean
-}
-
-interface PaginationParams {
-  page: number
-  page_size: number
 }

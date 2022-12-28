@@ -32,6 +32,8 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
     use crate::schema::questions::dsl::*;
     let mut con = db.get_connection();
 
+    let cat_id = session.get::<i32>("quiz_category_id").unwrap().unwrap();
+    let category = crate::models::categories::Category::read(&mut con, cat_id).unwrap();
     let answers: Vec<QuizAnswer>;
     let quiz_ids: Vec<i32>;
 
@@ -55,11 +57,9 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
 
     let q = query.unwrap();
 
-    let cat_id = session.get::<i32>("quiz_category_id").unwrap().unwrap();
-
     // create the result object
     let mut result = QuizSolution {
-        category_id: cat_id,
+        category_id: category.id,
         given_answers: answers,
         correct_answers: vec![],
         correct_answers_count: 0,
@@ -67,7 +67,7 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
         correct_answers_percentage: "0".to_string(),
         questions: q.clone(),
         score: "0".to_string(),
-        max_score: MAX,
+        max_score: 0,
     };
 
     // loop through the questions and check if the answer is correct, if so add it to the correct_answers array
@@ -108,6 +108,9 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
             - ((result.given_answers.len() as i32 - result.correct_answers_count) as f32
                 * (score.wrong_answer as f32))
     );
+
+    result.max_score =
+        ((score.correct_answer as f32) * category.questions_per_quiz as f32).floor() as u8;
 
     return HttpResponse::Ok().json(result);
 }

@@ -14,6 +14,7 @@ type Connection = create_rust_app::Connection;
 pub struct Category {
     pub id: i32,
     pub name: String,
+    pub questions_per_quiz: i32,
     pub created_at: chrono::NaiveDateTime,
     pub updated_at: chrono::NaiveDateTime,
 }
@@ -23,6 +24,7 @@ pub struct Category {
 #[diesel(table_name=categories)]
 pub struct CategoryForm {
     pub name: String,
+    pub questions_per_quiz: i32,
 }
 
 #[tsync::tsync]

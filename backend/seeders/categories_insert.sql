@@ -1,3 +1,3 @@
-INSERT INTO categories (name) VALUES 
-    ('las'),
-    ('sec');
+INSERT INTO categories (name, questions_per_quiz) VALUES 
+    ('las', 40),
+    ('sec', 40);

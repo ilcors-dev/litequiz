@@ -1,13 +1,13 @@
 use actix_web::{
-    get,
-    web::{Data, Path},
+    get, put,
+    web::{Data, Json, Path},
     HttpResponse,
 };
 use create_rust_app::Database;
 use diesel::{associations::HasTable, QueryDsl, RunQueryDsl};
 
-use crate::diesel::ExpressionMethods;
 use crate::models::categories::Category;
+use crate::{diesel::ExpressionMethods, models::categories::CategoryForm};
 
 #[tsync::tsync]
 #[derive(serde::Deserialize, serde::Serialize, Clone)]
@@ -63,6 +63,31 @@ async fn show(db: Data<Database>, category_id: Path<i32>) -> HttpResponse {
     return HttpResponse::Ok().json(cat.unwrap());
 }
 
+#[put("/{id}")]
+async fn update(
+    db: Data<Database>,
+    category_id: Path<i32>,
+    form: Json<CategoryForm>,
+) -> HttpResponse {
+    let mut con = db.get_connection();
+
+    let id = category_id.into_inner();
+
+    let cat = Category::read(&mut con, id);
+
+    if cat.is_err() {
+        return HttpResponse::NotFound().finish();
+    }
+
+    let cat = Category::update(&mut con, id, &form);
+
+    if cat.is_err() {
+        return HttpResponse::InternalServerError().finish();
+    }
+
+    return HttpResponse::Ok().json(cat.unwrap());
+}
+
 pub fn endpoints(scope: actix_web::Scope) -> actix_web::Scope {
-    return scope.service(index).service(show);
+    return scope.service(index).service(show).service(update);
 }

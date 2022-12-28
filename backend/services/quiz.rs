@@ -42,6 +42,14 @@ async fn index(
         return HttpResponse::Ok().json(result.unwrap());
     }
 
+    let category = crate::models::categories::Category::read(&mut con, info.category_id);
+
+    if category.is_err() {
+        return HttpResponse::NotFound().finish();
+    }
+
+    let questions_per_quiz = category.unwrap().questions_per_quiz;
+
     let result = query.load::<WithHiddenAnswer>(&mut con);
 
     if result.is_ok() {
@@ -52,7 +60,7 @@ async fn index(
         // as they are
         if !has_quiz {
             loop {
-                if items.len() == 40 {
+                if items.len() == questions_per_quiz as usize {
                     break;
                 }
 
