@@ -7,12 +7,19 @@ use actix_web::{
 };
 use create_rust_app::Database;
 use diesel::{associations::HasTable, prelude::*};
-use rand::{thread_rng, Rng};
+use getrandom::getrandom;
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
 pub struct QuizStarterParams {
     pub category_id: i32,
+}
+
+fn realrnd(max: u16) -> u16 {
+    let mut buf = [0u8; 2];
+    getrandom(&mut buf).unwrap();
+
+    return u16::from_be_bytes(buf) % max;
 }
 
 #[get("")]
@@ -64,7 +71,9 @@ async fn index(
                     break;
                 }
 
-                let item = q.get(thread_rng().gen_range(0..q.len())).unwrap();
+                let item = q
+                    .get(realrnd(q.len().try_into().unwrap()) as usize)
+                    .unwrap();
 
                 let is_dup = items
                     .iter()

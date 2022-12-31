@@ -1336,6 +1336,7 @@ dependencies = [
  "diesel",
  "dsync",
  "futures-util",
+ "getrandom",
  "rand",
  "serde",
  "serde_json",

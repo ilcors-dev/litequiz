@@ -26,6 +26,7 @@ serde_json = "1.0.79"
 tsync = "1"
 rand = "*"
 actix-session = { version = "*", features = ["cookie-session"] }
+getrandom = "0.2.8"
 
 [dependencies.chrono]
 features = ["serde"]
