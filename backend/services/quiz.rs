@@ -17,9 +17,16 @@ pub struct QuizStarterParams {
 
 fn realrnd(max: u16) -> u16 {
     let mut buf = [0u8; 2];
-    getrandom(&mut buf).unwrap();
 
-    return u16::from_be_bytes(buf) % max;
+    loop {
+        getrandom(&mut buf).unwrap();
+
+        let rnd = u16::from_be_bytes(buf);
+
+        if rnd <= max {
+            return rnd;
+        }
+    }
 }
 
 #[get("")]
