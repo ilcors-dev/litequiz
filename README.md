@@ -14,9 +14,11 @@ As for now you will need to manually insert them.
 
 ## How to run
 1. Install [stable Rust](https://www.rust-lang.org/tools/install)
-2. Clone the repository
-3. Setup the .env file (use `.env.example` for reference)
-4. Run `cargo fullstack` in the root folder
-5. You're good to go 🫡
+2. Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install)
+3. Clone the repository
+4. Setup the .env file (use `.env.example` for reference)
+5. Run `cargo fullstack` in the root folder
+6. You're good to go 🫡
+7. The app will be running at [http://localhost:3000](http://localhost:3000)
 
 __Note:__ refer to the [create-rust-app-readme](create-rust-app-readme.md) for more options and details about the running scripts.
