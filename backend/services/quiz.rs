@@ -129,10 +129,11 @@ fn add_question_with_hidden_answer(
     items: &mut Vec<WithHiddenAnswer>,
 ) {
     if item.is_multiple_choice {
-        let choices = crate::models::answers::Answer::table()
-            .filter(crate::schema::answers::question_id.eq(item.id))
-            .select((crate::schema::answers::id, crate::schema::answers::text))
-            .load::<(i32, String)>(con);
+        let choices: Result<Vec<(i32, String)>, diesel::result::Error> =
+            crate::models::answers::Answer::table()
+                .filter(crate::schema::answers::question_id.eq(item.id))
+                .select((crate::schema::answers::id, crate::schema::answers::text))
+                .load::<(i32, String)>(con);
 
         if choices.is_ok() {
             items.push(WithHiddenAnswer {
