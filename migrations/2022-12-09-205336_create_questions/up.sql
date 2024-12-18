@@ -3,6 +3,7 @@ CREATE TABLE questions (
     question TEXT NOT NULL,
     answer BOOLEAN,
     category_id INTEGER NOT NULL,
+    is_multiple_choice BOOLEAN NOT NULL DEFAULT 0,
     -- is the question verified? it means that the question comes from a trusted source, useful when the question
     -- inserted have been created by non-trusted sources and its answer is not therefore fully trusted
     verified BOOLEAN NOT NULL DEFAULT 1,

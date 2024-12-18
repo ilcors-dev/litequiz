@@ -1,4 +1,7 @@
-use crate::models::questions::{types::WithHiddenAnswer, Question};
+use crate::models::questions::{
+    types::{MultipleChoice, PartialQuestion, WithHiddenAnswer},
+    Question,
+};
 use actix_session::Session;
 use actix_web::{
     get,
@@ -6,7 +9,11 @@ use actix_web::{
     HttpResponse,
 };
 use create_rust_app::Database;
-use diesel::{associations::HasTable, prelude::*};
+use diesel::{
+    associations::HasTable,
+    prelude::*,
+    r2d2::{ConnectionManager, PooledConnection},
+};
 use getrandom::getrandom;
 
 #[tsync::tsync]
@@ -44,17 +51,17 @@ async fn index(
 
     let query = questions::table()
         .filter(category_id.eq(info.category_id))
-        .select((id, question, verified))
+        .select((id, question, verified, is_multiple_choice))
         .into_boxed();
 
     // if so we should return always the same questions saved in the session
-    if has_quiz {
-        let result = query
-            .filter(id.eq_any(quiz_ids.unwrap()))
-            .load::<WithHiddenAnswer>(&mut con);
+    // if has_quiz {
+    //    let result = query
+    //        .filter(id.eq_any(quiz_ids.unwrap()))
+    //        .load::<WithHiddenAnswer>(&mut con);
 
-        return HttpResponse::Ok().json(result.unwrap());
-    }
+    //    return HttpResponse::Ok().json(result.unwrap());
+    // }
 
     let category = crate::models::categories::Category::read(&mut con, info.category_id);
 
@@ -64,10 +71,16 @@ async fn index(
 
     let questions_per_quiz = category.unwrap().questions_per_quiz;
 
-    let result = query.load::<WithHiddenAnswer>(&mut con);
+    let result = if has_quiz {
+        query
+            .filter(id.eq_any(quiz_ids.unwrap()))
+            .load::<PartialQuestion>(&mut con)
+    } else {
+        query.load::<PartialQuestion>(&mut con)
+    };
 
     if result.is_ok() {
-        let q: Vec<WithHiddenAnswer> = result.unwrap();
+        let q: Vec<PartialQuestion> = result.unwrap();
         let mut items: Vec<WithHiddenAnswer> = Vec::new();
 
         // if the quiz is not active we should shuffle the q and save them in the session, otherwise keep them
@@ -87,23 +100,65 @@ async fn index(
                     .any(|i| i.id == item.id || i.question == item.question);
 
                 if !is_dup {
-                    items.push(item.clone());
+                    add_question_with_hidden_answer(&item, &mut con, &mut items);
                 }
             }
-
-            session
-                .insert("quiz_category_id", info.category_id)
-                .expect("Error saving quiz category to session");
-
-            session
-                .insert("quiz", items.iter().map(|q| q.id).collect::<Vec<i32>>())
-                .expect("Error saving quiz to session");
+        } else {
+            for item in q.into_iter() {
+                add_question_with_hidden_answer(&item, &mut con, &mut items);
+            }
         }
+
+        session
+            .insert("quiz_category_id", info.category_id)
+            .expect("Error saving quiz category to session");
+
+        session
+            .insert("quiz", items.iter().map(|q| q.id).collect::<Vec<i32>>())
+            .expect("Error saving quiz to session");
 
         return HttpResponse::Ok().json(items);
     }
 
     HttpResponse::InternalServerError().finish()
+}
+
+fn add_question_with_hidden_answer(
+    item: &PartialQuestion,
+    con: &mut PooledConnection<ConnectionManager<SqliteConnection>>,
+    items: &mut Vec<WithHiddenAnswer>,
+) {
+    if item.is_multiple_choice {
+        let choices = crate::models::answers::Answer::table()
+            .filter(crate::schema::answers::question_id.eq(item.id))
+            .select((crate::schema::answers::id, crate::schema::answers::text))
+            .load::<(i32, String)>(con);
+
+        if choices.is_ok() {
+            items.push(WithHiddenAnswer {
+                id: item.id,
+                question: item.question.clone(),
+                verified: item.verified,
+                is_multiple_choice: item.is_multiple_choice,
+                choices: choices
+                    .unwrap()
+                    .iter()
+                    .map(|(item_id, text)| MultipleChoice {
+                        id: *item_id,
+                        text: text.clone(),
+                    })
+                    .collect(),
+            });
+        }
+    } else {
+        items.push(WithHiddenAnswer {
+            id: item.id,
+            question: item.question.clone(),
+            verified: item.verified,
+            is_multiple_choice: item.is_multiple_choice,
+            choices: Vec::new(),
+        });
+    }
 }
 
 #[get("/{id}")]

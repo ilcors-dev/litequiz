@@ -16,6 +16,7 @@ pub struct Question {
     pub question: String,
     pub answer: Option<bool>,
     pub category_id: i32,
+    pub is_multiple_choice: bool,
     pub verified: bool,
     pub created_at: chrono::NaiveDateTime,
     pub updated_at: chrono::NaiveDateTime,
@@ -28,6 +29,7 @@ pub struct QuestionForm {
     pub question: String,
     pub answer: Option<bool>,
     pub category_id: i32,
+    pub is_multiple_choice: bool,
     pub verified: bool,
 }
 

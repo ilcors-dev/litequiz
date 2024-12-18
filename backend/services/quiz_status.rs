@@ -20,6 +20,7 @@ pub struct QuizStatus {
 pub struct QuizAnswer {
     pub question_id: i32,
     pub answer: Option<bool>,
+    pub answer_id: Option<i32>,
 }
 
 #[get("is-active")]

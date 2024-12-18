@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useQuizSolutionApi } from '../apis/useQuizSolutionApi';
 import { QuizDestroy } from '../components/QuizDestroy';
 import { QuizRowResult } from '../components/QuizRowResult';
+import { QuizRowResultMultipleChoice } from '../components/QuizRowResultMultipleChoice';
 
 export const QuizResult = () => {
 	const solution = useQuery('solution', useQuizSolutionApi().get);
@@ -45,19 +46,42 @@ export const QuizResult = () => {
 			</div>
 			<div>
 				<ol className="mt-10">
-					{solution.data?.questions.map((q, i) => (
-						<QuizRowResult
-							q={q}
-							i={i}
-							key={i}
-							className="my-5"
-							givenAnswer={
-								solution.data?.given_answers.find((a) => a.question_id === q.id)
-									?.answer
-							}
-							correctAnswer={q.answer}
-						/>
-					))}
+					{solution.data?.questions.map((q, i) =>
+						q.is_multiple_choice ? (
+							<QuizRowResultMultipleChoice
+								q={q}
+								i={i}
+								key={i}
+								choices={solution.data.choices.filter(
+									(a) => a.question_id === q.id
+								)}
+								className="my-5"
+								givenAnswer={
+									solution.data?.given_answers.find(
+										(a) => a.question_id === q.id
+									)?.answer_id
+								}
+								correctAnswer={
+									solution.data.multiple_choice_solutions.find(
+										(s) => s.question_id === q.id
+									)?.id
+								}
+							/>
+						) : (
+							<QuizRowResult
+								q={q}
+								i={i}
+								key={i}
+								className="my-5"
+								givenAnswer={
+									solution.data?.given_answers.find(
+										(a) => a.question_id === q.id
+									)?.answer
+								}
+								correctAnswer={q.answer}
+							/>
+						)
+					)}
 				</ol>
 			</div>
 		</div>

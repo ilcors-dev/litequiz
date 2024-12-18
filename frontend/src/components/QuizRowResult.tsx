@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface Props {
 	i: number;
-	q: WithHiddenAnswer;
+	q: Question;
 	className: string;
 	givenAnswer?: boolean;
 	correctAnswer?: boolean;

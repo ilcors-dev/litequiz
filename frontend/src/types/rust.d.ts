@@ -1,5 +1,29 @@
 /* This file is generated and managed by tsync */
 
+interface Answer {
+  id: number
+  question_id: number
+  text: string
+  is_correct: boolean
+  created_at: Date
+  updated_at: Date
+}
+
+interface AnswerForm {
+  question_id: number
+  text: string
+  is_correct: boolean
+}
+
+interface PaginationResult<T> {
+  items: Array<T>
+  total_items: number
+  /** 0-based index */
+  page: number
+  page_size: number
+  num_pages: number
+}
+
 interface Category {
   id: number
   name: string
@@ -51,6 +75,7 @@ interface Question {
   question: string
   answer?: boolean
   category_id: number
+  is_multiple_choice: boolean
   verified: boolean
   created_at: Date
   updated_at: Date
@@ -60,6 +85,7 @@ interface QuestionForm {
   question: string
   answer?: boolean
   category_id: number
+  is_multiple_choice: boolean
   verified: boolean
 }
 
@@ -72,10 +98,24 @@ interface PaginationResult<T> {
   num_pages: number
 }
 
+interface MultipleChoice {
+  id: number
+  text: string
+}
+
 interface WithHiddenAnswer {
   id: number
   question: string
   verified: boolean
+  is_multiple_choice: boolean
+  choices: Array<MultipleChoice>
+}
+
+interface PartialQuestion {
+  id: number
+  question: string
+  verified: boolean
+  is_multiple_choice: boolean
 }
 
 interface WithAnswer {
@@ -102,6 +142,8 @@ interface QuizSolution {
   total_questions: number
   correct_answers_percentage: string
   questions: Array<Question>
+  choices: Array<Answer>
+  multiple_choice_solutions: Array<Answer>
   score: string
   max_score: number
 }
@@ -114,4 +156,5 @@ interface QuizStatus {
 interface QuizAnswer {
   question_id: number
   answer?: boolean
+  answer_id?: number
 }

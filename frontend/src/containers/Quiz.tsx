@@ -8,6 +8,7 @@ import { useQuizStatusApi } from '../apis/useQuizStatusApi';
 import { QuizDestroy } from '../components/QuizDestroy';
 import { QuizRow } from '../components/QuizRow';
 import { QuizSubmit } from '../components/QuizSubmit';
+import { QuizRowMultipleChoice } from '../components/QuizRowMultipleChoice';
 
 export const Quiz = () => {
 	const { categoryId } = useParams();
@@ -24,7 +25,9 @@ export const Quiz = () => {
 	});
 	const saveStatus = useMutation(() =>
 		useQuizStatusApi().post(
-			answers?.filter((a) => a.answer !== undefined) ?? []
+			answers?.filter(
+				(a) => a.answer !== undefined || a.answer_id !== undefined
+			) ?? []
 		)
 	);
 
@@ -77,16 +80,27 @@ export const Quiz = () => {
 				<QuizSubmit answers={answers} />
 			</div>
 			<ol className="">
-				{questions.data?.map((q, i) => (
-					<QuizRow
-						q={q}
-						i={i}
-						key={i}
-						className="my-5"
-						state={status.data?.find((a) => a.question_id === q.id)}
-						set={handleAnswerToggle}
-					/>
-				))}
+				{questions.data?.map((q, i) =>
+					q.is_multiple_choice ? (
+						<QuizRowMultipleChoice
+							q={q}
+							i={i}
+							key={i}
+							className="my-5"
+							state={status.data?.find((a) => a.question_id === q.id)}
+							set={handleAnswerToggle}
+						/>
+					) : (
+						<QuizRow
+							q={q}
+							i={i}
+							key={i}
+							className="my-5"
+							state={status.data?.find((a) => a.question_id === q.id)}
+							set={handleAnswerToggle}
+						/>
+					)
+				)}
 			</ol>
 		</div>
 	);
