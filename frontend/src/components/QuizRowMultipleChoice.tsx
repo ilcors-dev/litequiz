@@ -7,8 +7,8 @@ interface Props {
 	i: number;
 	q: WithHiddenAnswer;
 	className: string;
-	state?: QuizAnswer;
-	set: (answer: QuizAnswer) => void;
+	state?: QuizAnswer[];
+	set: (answer: QuizAnswer[]) => void;
 }
 
 export const QuizRowMultipleChoice = ({
@@ -19,17 +19,26 @@ export const QuizRowMultipleChoice = ({
 	set,
 }: Props) => {
 	const id = useId();
-	const [answer, setAnswer] = useState<number | undefined>(state?.answer_id);
+	const [answer, setAnswer] = useState<number[] | undefined>(
+		state
+			?.map((a) => a.answer_id)
+			.filter((id): id is number => id !== undefined)
+	);
 
-	const handleAnswer = (_answer: number) => {
+	const handleAnswer = (_answer: number[]) => {
 		if (_answer === answer) {
 			setAnswer(undefined);
-			set({ question_id: q.id, answer_id: undefined });
+			set(state?.filter((a) => a.question_id !== q.id) as QuizAnswer[]);
 			return;
 		}
 
 		setAnswer(_answer);
-		set({ question_id: q.id, answer_id: _answer });
+		set(
+			_answer.map((a) => ({
+				question_id: q.id,
+				answer_id: a,
+			}))
+		);
 	};
 
 	return (
@@ -73,11 +82,17 @@ export const QuizRowMultipleChoice = ({
 							<div className="mr-2 ml-auto inline-flex items-center space-x-2 pl-2">
 								<button
 									className={`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow ${
-										answer !== undefined && answer === a.id
+										answer !== undefined && answer.includes(a.id)
 											? 'brutal-btn'
 											: 'opacity-30'
 									}`}
-									onClick={() => handleAnswer(a.id)}
+									onClick={() => handleAnswer(
+										answer === undefined
+											? [a.id]
+											: answer.includes(a.id)
+											? answer.filter((id) => id !== a.id)
+											: [...answer, a.id]
+									)}
 								>
 									✅
 								</button>

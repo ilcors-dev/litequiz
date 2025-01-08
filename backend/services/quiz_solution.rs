@@ -128,13 +128,21 @@ async fn get(db: Data<Database>, session: Session) -> HttpResponse {
                 result.correct_answers_count += 1;
             }
 
-            let correct_answer = answers.as_ref().unwrap().iter().find(|a| a.2).map(|a| a.0);
+            let correct_answers = answers
+                .as_ref()
+                .unwrap()
+                .iter()
+                .filter(|a| a.2)
+                .map(|a| a.0)
+                .collect::<Vec<i32>>();
 
-            result.correct_answers.push(QuizAnswer {
-                question_id: quest.id,
-                answer: None,
-                answer_id: correct_answer,
-            });
+            for correct_answer in correct_answers {
+                result.correct_answers.push(QuizAnswer {
+                    question_id: quest.id,
+                    answer: None,
+                    answer_id: Some(correct_answer),
+                });
+            }
         } else if ans.answer.unwrap() == quest.answer.unwrap() {
             result.correct_answers_count += 1;
             result.correct_answers.push(QuizAnswer {

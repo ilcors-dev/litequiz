@@ -9,6 +9,7 @@ import { QuizDestroy } from '../components/QuizDestroy';
 import { QuizRow } from '../components/QuizRow';
 import { QuizSubmit } from '../components/QuizSubmit';
 import { QuizRowMultipleChoice } from '../components/QuizRowMultipleChoice';
+import { uniqBy } from 'lodash';
 
 export const Quiz = () => {
 	const { categoryId } = useParams();
@@ -41,7 +42,8 @@ export const Quiz = () => {
 		}
 
 		const index = answers.findIndex(
-			(a) => a.question_id === answer.question_id
+			(a) =>
+				a.question_id === answer.question_id && a.answer_id === answer.answer_id
 		);
 
 		if (index === -1) {
@@ -74,7 +76,7 @@ export const Quiz = () => {
 				<h1 className="text-4xl font-bold">Quiz {category.data?.name}</h1>
 				<QuizDestroy />
 				<span className="brutal-btn">
-					{answers?.filter((a) => a.answer !== undefined).length ?? 0}/
+					{Object.keys(uniqBy(answers, (a) => a.question_id)).length}/
 					{questions.data?.length}
 				</span>
 				<QuizSubmit answers={answers} />
@@ -87,8 +89,8 @@ export const Quiz = () => {
 							i={i}
 							key={i}
 							className="my-5"
-							state={status.data?.find((a) => a.question_id === q.id)}
-							set={handleAnswerToggle}
+							state={status.data?.filter((a) => a.question_id === q.id)}
+							set={(answers) => answers.forEach((a) => handleAnswerToggle(a))}
 						/>
 					) : (
 						<QuizRow

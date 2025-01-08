@@ -6,8 +6,8 @@ interface Props {
 	q: Question;
 	choices: Answer[];
 	className: string;
-	givenAnswer?: number;
-	correctAnswer?: number;
+	givenAnswers?: number[];
+	correctAnswers?: number[];
 }
 
 export const QuizRowResultMultipleChoice = ({
@@ -15,8 +15,8 @@ export const QuizRowResultMultipleChoice = ({
 	className,
 	choices,
 	i,
-	givenAnswer,
-	correctAnswer,
+	givenAnswers,
+	correctAnswers,
 }: Props) => {
 	return (
 		<li className={classNames('brutal-border relative py-4', className)}>
@@ -37,7 +37,7 @@ export const QuizRowResultMultipleChoice = ({
 										className={classNames(
 											`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow`,
 											{
-												'brutal-btn bg-green-300': a.id === correctAnswer,
+												'brutal-btn bg-green-300': correctAnswers?.includes(a.id),
 											}
 										)}
 									>
@@ -48,7 +48,7 @@ export const QuizRowResultMultipleChoice = ({
 										className={classNames(
 											`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow`,
 											{
-												'brutal-btn bg-red-300': a.id === givenAnswer,
+												'brutal-btn bg-red-300': givenAnswers?.includes(a.id),
 											}
 										)}
 									>

@@ -4,6 +4,7 @@ import { useQuizSolutionApi } from '../apis/useQuizSolutionApi';
 import { QuizDestroy } from '../components/QuizDestroy';
 import { QuizRowResult } from '../components/QuizRowResult';
 import { QuizRowResultMultipleChoice } from '../components/QuizRowResultMultipleChoice';
+import { uniqBy } from 'lodash';
 
 export const QuizResult = () => {
 	const solution = useQuery('solution', useQuizSolutionApi().get);
@@ -21,7 +22,7 @@ export const QuizResult = () => {
 				<div className="mt-5 flex justify-between">
 					<span className="col-span-4">Total questions answered</span>
 					<span className="col-span-8 text-xl font-semibold">
-						{solution.data?.given_answers.length}/
+						{uniqBy(solution.data?.given_answers, (a) => a.question_id).length}/
 						{solution.data?.total_questions}
 					</span>
 				</div>
@@ -56,16 +57,12 @@ export const QuizResult = () => {
 									(a) => a.question_id === q.id
 								)}
 								className="my-5"
-								givenAnswer={
-									solution.data?.given_answers.find(
-										(a) => a.question_id === q.id
-									)?.answer_id
-								}
-								correctAnswer={
-									solution.data.multiple_choice_solutions.find(
-										(s) => s.question_id === q.id
-									)?.id
-								}
+								givenAnswers={solution.data?.given_answers
+									.filter((a) => a.question_id === q.id)
+									.map((a) => a.answer_id!)}
+								correctAnswers={solution.data.multiple_choice_solutions
+									.filter((s) => s.question_id === q.id)
+									.map((a) => a.id)}
 							/>
 						) : (
 							<QuizRowResult
