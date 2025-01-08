@@ -1,0 +1,1868 @@
+{
+  "questions": [
+    {
+      "question_text": "In a Decision Tree for classification, what is a leaf node?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "A node which allows classification without errors",
+          "is_correct": false
+        },
+        {
+          "text": "A node which assigns a class value only by majority of examples",
+          "is_correct": false
+        },
+        {
+          "text": "A node where all the objects belong to the same class",
+          "is_correct": false
+        },
+        {
+          "text": "A node which assigns a class value to the objects passing the tests on the path from the root to the node itself",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following types of data allows the use of the euclidean distance?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Ordered data",
+          "is_correct": false
+        },
+        {
+          "text": "Transactional data",
+          "is_correct": false
+        },
+        {
+          "text": "Points in a vector space",
+          "is_correct": true
+        },
+        {
+          "text": "Document representations",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In data preprocessing, which of the following is not an objective of the aggregation of attributes",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Reduce the number of attributes or objects",
+          "is_correct": false
+        },
+        {
+          "text": "Obtain a less detailed scale",
+          "is_correct": false
+        },
+        {
+          "text": "Reduce the variability of data",
+          "is_correct": false
+        },
+        {
+          "text": "Obtain a more detailed description of data",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "In order to reduce the dimensionality of a dataset, which is the advantage of Multi Dimensional Scaling (MDS), with respect to Principal Component Analysis (PCA)",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "MDS can be used also with categorical data, provided that the matrix of the distance is available, while PCA is limited to vector spaces",
+          "is_correct": true
+        },
+        {
+          "text": "MDS can work on any kind of data, while PCA is limited to categorical data",
+          "is_correct": false
+        },
+        {
+          "text": "MDS requires less computational power",
+          "is_correct": false
+        },
+        {
+          "text": "MDS can be used with categorical data after a transformation in a vector space",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following is a strength of the clustering algorithm DBSCAN?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Requires to set the number of clusters as a parameter",
+          "is_correct": false
+        },
+        {
+          "text": "Ability to find cluster with concavities",
+          "is_correct": true
+        },
+        {
+          "text": "Ability to separate outliers from regular data",
+          "is_correct": true
+        },
+        {
+          "text": "Very fast by computation",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "After fitting DBSCAN with the default parameter values the results are: 0 clusters, 100% of noise points. Which will be your next trial?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Increase the radius of the neighborhood",
+          "is_correct": true
+        },
+        {
+          "text": "Decrease the radius of the neighborhood",
+          "is_correct": false
+        },
+        {
+          "text": "Reduce the minimum number of objects in the neighborhood",
+          "is_correct": true
+        },
+        {
+          "text": "Reduce the minimum number of objects in the neighborhood and the radius of the neighborhood",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In feature selection, what is the Principal Component Analysis?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "A mathematical technique used to find the principal attributes which determine the classification process",
+          "is_correct": false
+        },
+        {
+          "text": "A heuristic technique used to find a subset of the attributes which produces the same classifier",
+          "is_correct": false
+        },
+        {
+          "text": "A mathematical technique used to transform non numeric attributes into numeric attributes",
+          "is_correct": false
+        },
+        {
+          "text": "A mathematical technique used to transform a set of numeric attributes into a smaller set of numeric attributes which capture most of the variability in data",
+          "is_correct": true
+        }
+      ]
+    },
+
+    /*
+      SPLIT QUESTION: "For each type of data choose the best suited distance function
+      Manhattan distance Euclidean distance Jaccard coefficient Cosine distance
+      Vector space with real values
+      Vectors of terms representing documents
+      Boolean data
+      High dimensional spaces"
+
+      We break it into 4 single-choice sub-questions. 
+    */
+    {
+      "question_text": "For the data type 'Vector space with real values', which is the best suited distance function?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Manhattan distance",
+          "is_correct": false
+        },
+        {
+          "text": "Euclidean distance",
+          "is_correct": true
+        },
+        {
+          "text": "Jaccard coefficient",
+          "is_correct": false
+        },
+        {
+          "text": "Cosine distance",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "For the data type 'Vectors of terms representing documents', which is the best suited distance function?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Manhattan distance",
+          "is_correct": false
+        },
+        {
+          "text": "Euclidean distance",
+          "is_correct": false
+        },
+        {
+          "text": "Jaccard coefficient",
+          "is_correct": false
+        },
+        {
+          "text": "Cosine distance",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "For the data type 'Boolean data', which is the best suited distance function?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Manhattan distance",
+          "is_correct": false
+        },
+        {
+          "text": "Euclidean distance",
+          "is_correct": false
+        },
+        {
+          "text": "Jaccard coefficient",
+          "is_correct": true
+        },
+        {
+          "text": "Cosine distance",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "For the data type 'High dimensional spaces', which is the best suited distance function?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Manhattan distance",
+          "is_correct": true
+        },
+        {
+          "text": "Euclidean distance",
+          "is_correct": false
+        },
+        {
+          "text": "Jaccard coefficient",
+          "is_correct": false
+        },
+        {
+          "text": "Cosine distance",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "How does pruning work when generating frequent itemsets?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "If an itemset is frequent, then none of its supersets can be frequent, therefore the frequencies of the supersets are not evaluated",
+          "is_correct": false
+        },
+        {
+          "text": "If an itemset is frequent, then none of its subsets can be frequent, therefore the frequencies of the subsets are not evaluated",
+          "is_correct": false
+        },
+        {
+          "text": "If an itemset is not frequent, then none of its supersets can be frequent, therefore the frequencies of the supersets are not evaluated",
+          "is_correct": true
+        },
+        {
+          "text": "If an itemset is not frequent, then none of its subsets can be frequent, therefore the frequencies of the subsets are not evaluated",
+          "is_correct": false
+        }
+      ]
+    },
+
+    /*
+      SPLIT QUESTION: "Match specific situations of data to the most appropriate pre-processing activity
+      Rescaling Non linear transformations Aggregation OneHot Encoding
+      A nominal attribute needs to be used as predicting when using the sklearn library
+      An attribute has a very skewed distribution
+      The numeric attributes have very diverse ranges of values
+      A categorical attribute has a too large number of distinct values"
+    */
+    {
+      "question_text": "Match the situation: 'A nominal attribute needs to be used as predicting when using the sklearn library' with the best pre-processing activity",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Rescaling",
+          "is_correct": false
+        },
+        {
+          "text": "Non linear transformations",
+          "is_correct": false
+        },
+        {
+          "text": "Aggregation",
+          "is_correct": false
+        },
+        {
+          "text": "OneHot Encoding",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Match the situation: 'An attribute has a very skewed distribution (e.g. most of the values concentrated in a small range, and a very long tail of outliers)' with the best pre-processing activity",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Rescaling",
+          "is_correct": false
+        },
+        {
+          "text": "Non linear transformations",
+          "is_correct": true
+        },
+        {
+          "text": "Aggregation",
+          "is_correct": false
+        },
+        {
+          "text": "OneHot Encoding",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Match the situation: 'The numeric attributes have very diverse ranges of values' with the best pre-processing activity",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Rescaling",
+          "is_correct": true
+        },
+        {
+          "text": "Non linear transformations",
+          "is_correct": false
+        },
+        {
+          "text": "Aggregation",
+          "is_correct": false
+        },
+        {
+          "text": "OneHot Encoding",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Match the situation: 'A categorical attribute has a too large number of distinct values' with the best pre-processing activity",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Rescaling",
+          "is_correct": false
+        },
+        {
+          "text": "Non linear transformations",
+          "is_correct": false
+        },
+        {
+          "text": "Aggregation",
+          "is_correct": true
+        },
+        {
+          "text": "OneHot Encoding",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is different from the others?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Silhouette Index",
+          "is_correct": true
+        },
+        {
+          "text": "Gini Index",
+          "is_correct": false
+        },
+        {
+          "text": "Misclassification Error",
+          "is_correct": false
+        },
+        {
+          "text": "Entropy",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "When developing a classifier, which of the following is a symptom of overfitting?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The error rate in the test set is much smaller than the error rate in the training set",
+          "is_correct": false
+        },
+        {
+          "text": "The precision is much greater than the recall",
+          "is_correct": false
+        },
+        {
+          "text": "The error rate in the test set is much greater than the error rate in the training set",
+          "is_correct": true
+        },
+        {
+          "text": "The error rate in the test set is more than 30%",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Given the following definitions: TP = True Positives; TN = True Negatives; FP = False Positives; FN = False Negatives. Which of the formulas below computes the precision of a binary classifier",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "TP / (TP + FP)",
+          "is_correct": true
+        },
+        {
+          "text": "(TP + TN) / (TP + FP + TN + FN)",
+          "is_correct": false
+        },
+        {
+          "text": "TN / (TN + FP)",
+          "is_correct": false
+        },
+        {
+          "text": "TP / (TP + FN)",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following is a base hypothesis for a bayesian classifier?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The attributes must have negative correlation",
+          "is_correct": false
+        },
+        {
+          "text": "The attributes must be statistically independent inside each class",
+          "is_correct": true
+        },
+        {
+          "text": "The attributes must have zero correlation",
+          "is_correct": false
+        },
+        {
+          "text": "The attributes must be statistically independent",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "How can we measure the quality of a trained regression model?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "With a formula elaborating the difference between the forecast values and the true ones",
+          "is_correct": true
+        },
+        {
+          "text": "With a confusion matrix",
+          "is_correct": false
+        },
+        {
+          "text": "Counting the number of values correctly forecast",
+          "is_correct": false
+        },
+        {
+          "text": "With precision, recall and accuracy",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the statements below is true? (Only one)",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "K-means works well also with datasets having a very large number of attributes",
+          "is_correct": false
+        },
+        {
+          "text": "K-means always stop to a configuration which gives the minimum distortion for the chosen value of the number of clusters",
+          "is_correct": false
+        },
+        {
+          "text": "Sometimes k-means stops to a configuration which does not give the minimum distortion for the chosen value of the number of clusters",
+          "is_correct": true
+        },
+        {
+          "text": "K-means finds the number of clusters which give the minimum distortion",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following is not a strength point of Dbscan with respect to K-means",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The effectiveness even if there are clusters with non-convex shape",
+          "is_correct": false
+        },
+        {
+          "text": "The efficiency even in large datasets",
+          "is_correct": true
+        },
+        {
+          "text": "The robustness with respect to outliers",
+          "is_correct": false
+        },
+        {
+          "text": "The effectiveness, even in presence of noise",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What does K-means try to minimise?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The distortion, that is the sum of the squared distances of each point with respect to the points of the other clusters",
+          "is_correct": false
+        },
+        {
+          "text": "The separation, that is the sum of the squared distances of each point with respect to its centroid",
+          "is_correct": false
+        },
+        {
+          "text": "The distortion, that is the sum of the squared distances of each point with respect to its centroid",
+          "is_correct": true
+        },
+        {
+          "text": "The separation, that is the sum of the squared distances of each cluster centroid with respect to the global centroid of the dataset",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Given the following definitions: TP = True Positives; TN = True Negatives; FP = False Positives; FN = False Negatives. Which of the formulas below computes the accuracy of a binary classifier?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "TN / (TN + FP)",
+          "is_correct": false
+        },
+        {
+          "text": "(TP + TN) / (TP + FP + TN + FN)",
+          "is_correct": true
+        },
+        {
+          "text": "TP / (TP + FP)",
+          "is_correct": false
+        },
+        {
+          "text": "TP / (TP + FN)",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the cross validation",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "A technique to obtain a good estimation of the performance of a classifier when it will be used with data different from the training set",
+          "is_correct": true
+        },
+        {
+          "text": "A technique to obtain a good estimation of the performance of a classifier with the training set",
+          "is_correct": false
+        },
+        {
+          "text": "A technique to improve the quality of a classifier",
+          "is_correct": false
+        },
+        {
+          "text": "A technique to improve the speed of a classifier",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the statements below is true? (One or more)",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Sometimes k-means stops to a configuration which does not give the minimum distortion for the chosen value of the number of clusters",
+          "is_correct": true
+        },
+        {
+          "text": "K-means is quite efficient even for large datasets",
+          "is_correct": true
+        },
+        {
+          "text": "K-means is very sensitive to the initial assignment of the centers",
+          "is_correct": true
+        },
+        {
+          "text": "K-mean always stops to a configuration which gives the minimum distortion for the chosen value of the number of clusters",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In data preprocessing, which of the operations below performs aggregation? (One or more)",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Combination of two attributes in order to obtatn a more general attribute with smaller variability",
+          "is_correct": false
+        },
+        {
+          "text": "Reduction of the number of distinct values of an attribute. in order to reduce its variability",
+          "is_correct": true
+        },
+        {
+          "text": "Combination of two or more datasets in Order to obtatn more Information",
+          "is_correct": false
+        },
+        {
+          "text": "Reduction of the number of rows of the dataset by applying a grouping on one or more attributes and computing the measures as the results of aggregation functions",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "In a decision tree, the number of objects in a node...",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "... is bigger than the number of objects in its ancestor",
+          "is_correct": false
+        },
+        {
+          "text": "... is smaller than or equal to the number of objects in its ancestor",
+          "is_correct": true
+        },
+        {
+          "text": "... is not related to the number of objects in its ancestor",
+          "is_correct": false
+        },
+        {
+          "text": "... is smaller than the number of objects in its ancestor",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the meaning of the statement \"the support is anti-monotone\"?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "The support of an itemset is always smaller than the support of its subsets",
+          "is_correct": false
+        },
+        {
+          "text": "The support of an itemset never exceeds the support if its subsets",
+          "is_correct": false
+        },
+        {
+          "text": "The support of an itemsets never exceeds the support if its supersets",
+          "is_correct": true
+        },
+        {
+          "text": "The support of an itemset is always smaller than the support of its supersets",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In a dataset with D attributes, how many subsets of attributes should be considered for feature selection according ot an exhaustive search?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "O(D2)",
+          "is_correct": false
+        },
+        {
+          "text": "O(D!)",
+          "is_correct": false
+        },
+        {
+          "text": "O(D)",
+          "is_correct": false
+        },
+        {
+          "text": "O(2D)",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is the main reason for the MinMax scaling (also known as \"rescaling\") of attributes?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Map all the numeric attributes to the same range, in order to prevent attributes with higher range from having prevalent influence",
+          "is_correct": true
+        },
+        {
+          "text": "Remove abnormal values",
+          "is_correct": false
+        },
+        {
+          "text": "Change the distribution of the numeric attributes, in order to obtain gaussian distributions",
+          "is_correct": false
+        },
+        {
+          "text": "Map all the nominal attributes to the same range in order to prevent the values with higher frequency from having prevailing influence",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In a Neural Network, what is the backpropagation?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The technique used to adjust the node weights according to the difference between the desired output and the output generated by the network",
+          "is_correct": false
+        },
+        {
+          "text": "The technique used to adjust the output according to the difference between the desired weights and the actual weights",
+          "is_correct": false
+        },
+        {
+          "text": "The technique used to adjust the weights limiting the probability of overfitting",
+          "is_correct": false
+        },
+        {
+          "text": "The technique used to adjust the connection weights according to the difference between the desired output and the output generated by the network",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the main purpose of smoothing in Bayesian classification?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Reduce the variability of the data",
+          "is_correct": false
+        },
+        {
+          "text": "Classifying an object containing attribute values which are missing from some classes in the training set",
+          "is_correct": true
+        },
+        {
+          "text": "Dealing with missing values",
+          "is_correct": false
+        },
+        {
+          "text": "Classifying an object containing attribute values which are missing from some classes in the test set",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Why do we prune a decision tree?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "To eliminate rows of the dataset which could be influenced by random effects",
+          "is_correct": false
+        },
+        {
+          "text": "To eliminate parts of the tree where the decisions could be influenced by random effects",
+          "is_correct": true
+        },
+        {
+          "text": "To eliminate attributes which could be influenced by random effects",
+          "is_correct": false
+        },
+        {
+          "text": "To eliminate parts of the tree where the decision could generate underfitting",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the statements below is true? (One or more)",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Increasing the radius of the neighourhood can decrease the number of noise points",
+          "is_correct": true
+        },
+        {
+          "text": "DBSCAN always stops to a configuration which gives the optimal number of clusters",
+          "is_correct": false
+        },
+        {
+          "text": "DBScan can give good performance when clusters have concavities",
+          "is_correct": true
+        },
+        {
+          "text": "Sometimes DBSCAN stops to a configuration which does not include any cluster",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following is not a property of a metric distance function",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Triangle inequality",
+          "is_correct": false
+        },
+        {
+          "text": "Positive definiteness",
+          "is_correct": false
+        },
+        {
+          "text": "Symmetry",
+          "is_correct": false
+        },
+        {
+          "text": "Boundedness",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the coefficient of determination R2?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Provide an index of goodness for a linear regression model",
+          "is_correct": true
+        },
+        {
+          "text": "Measure the amount of error in a linear regression model",
+          "is_correct": false
+        },
+        {
+          "text": "Measure the amount of error in a regression model",
+          "is_correct": false
+        },
+        {
+          "text": "An index of goodness for a classification model",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the first step in agglomerative clustering?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Cluster Assignment: Assign each data point to a cluster based on the final structure obtained from the dendrogram",
+          "is_correct": false
+        },
+        {
+          "text": "Initialization: Start with each data point as a singleton cluster",
+          "is_correct": true
+        },
+        {
+          "text": "Pairwise Cluster Similarity Calculation: Compute the pairwise similarity or distance between all clusters",
+          "is_correct": false
+        },
+        {
+          "text": "Cutting the Dendrogram: Decide on the number of clusters by cutting the dendrogram at a certain height",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In data preparation which is the effect of normalisation?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Map all the numeric attributes subtracting the respective mean and dividing by variance",
+          "is_correct": false
+        },
+        {
+          "text": "Map all the numeric attributes to the same range and to have a Gaussian (or normal) distribution, in order to avoid that attributes with large ranges have more influence",
+          "is_correct": false
+        },
+        {
+          "text": "Map all the numeric attributes to the same range, without altering the distribution, in order to avoid that attributes with large ranges have more influence",
+          "is_correct": true
+        },
+        {
+          "text": "Map all the numeric attributes in order to have a Gaussian (or normal) distribution, in order to avoid that attributes with large ranges have more influence",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In which mining activity the Information Gain can be useful?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Clustering",
+          "is_correct": false
+        },
+        {
+          "text": "Discretization",
+          "is_correct": false
+        },
+        {
+          "text": "Discovery of association rules",
+          "is_correct": false
+        },
+        {
+          "text": "Classification",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "(refer to the image) 40%, 20%, 50%, 100%",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "40%",
+          "is_correct": false
+        },
+        {
+          "text": "20%",
+          "is_correct": false
+        },
+        {
+          "text": "50%",
+          "is_correct": true
+        },
+        {
+          "text": "100%",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following statements regarding the discovery of association rules is true? (One or more)",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The confidence of a rule can be computed starting from the supports of the itemsets",
+          "is_correct": true
+        },
+        {
+          "text": "The support of a rule can be computed given the confidence of the rule",
+          "is_correct": false
+        },
+        {
+          "text": "The support of an itemset is anti-monotonic with respect to the composition of the itemset",
+          "is_correct": true
+        },
+        {
+          "text": "The confidence of an itemset is anti-monotonic with respect to the composition of the itemset",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following statements is true?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The data which are similar to the majority are never noise",
+          "is_correct": false
+        },
+        {
+          "text": "Outliers can be due to noise",
+          "is_correct": true
+        },
+        {
+          "text": "The noise always generate outliers",
+          "is_correct": false
+        },
+        {
+          "text": "The noise can generate outliers",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is the purpose of discretisation?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Reduce the range of values of a numeric attribute, to make all the attributes more comparable",
+          "is_correct": false
+        },
+        {
+          "text": "Reduce the number of distinct values in an attribute, in order to increase the efficiency of the computations",
+          "is_correct": false
+        },
+        {
+          "text": "Reduce the number of distinct values in an attribute, in order to put in evidence possible patterns and regularities",
+          "is_correct": true
+        },
+        {
+          "text": "Increase the number of distinct values in an attribute, in order to put in evidence possible patterns and regularities",
+          "is_correct": false
+        }
+      ]
+    },
+
+    /*
+      SPLIT QUESTION: "Match the rule evaluation formulas with their names
+        Leverage Lift Confidence Conviction
+        4 2 3 1"
+      We convert into a single question with 4 possible answers. 
+      The text basically says the final matching is: 
+      Leverage -> 4
+      Lift -> 2
+      Confidence -> 3
+      Conviction -> 1
+      For completeness, we keep them in a multiple choice structure.
+    */
+    {
+      "question_text": "Match the rule evaluation formulas with their names (Leverage, Lift, Confidence, Conviction)",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Leverage -> 4, Lift -> 2, Confidence -> 3, Conviction -> 1",
+          "is_correct": true
+        },
+        {
+          "text": "Leverage -> 3, Lift -> 1, Confidence -> 4, Conviction -> 2",
+          "is_correct": false
+        },
+        {
+          "text": "Leverage -> 1, Lift -> 2, Confidence -> 3, Conviction -> 4",
+          "is_correct": false
+        },
+        {
+          "text": "Leverage -> 2, Lift -> 3, Confidence -> 4, Conviction -> 1",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the difference between classification and regression?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Classification has a categorical target, while regression has a numeric target",
+          "is_correct": true
+        },
+        {
+          "text": "Classification is a supervised activity. while regression in unsupervised",
+          "is_correct": false
+        },
+        {
+          "text": "Classification can make errors, while regression is always exact",
+          "is_correct": false
+        },
+        {
+          "text": "Classification can have a numeric or categorical target, while regression has always a categorical target",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following characteristic of data can reduce the effectiveness of K-Means?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "All the variables have the same distribution of values",
+          "is_correct": false
+        },
+        {
+          "text": "Presence of values with high frequency",
+          "is_correct": false
+        },
+        {
+          "text": "All the variables have the same range of values",
+          "is_correct": false
+        },
+        {
+          "text": "Presence of outliers",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "In data preprocessing, which of the following are the objectives of the aggregation of attributes?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Obtain a more detailed description of data",
+          "is_correct": false
+        },
+        {
+          "text": "Obtain a less detailed scale",
+          "is_correct": true
+        },
+        {
+          "text": "Reduce the number of attributes or distinct values",
+          "is_correct": true
+        },
+        {
+          "text": "Reduce the variability of data",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the statements below about Hierarchical Agglomerative Clustering is true?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Is very efficient also with large datasets",
+          "is_correct": false
+        },
+        {
+          "text": "Is based on a well founded statistical model",
+          "is_correct": false
+        },
+        {
+          "text": "Requires the definition of distance between sets of objects",
+          "is_correct": true
+        },
+        {
+          "text": "Requires the definition of Inertia of clusters",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What are the hyperparameters of a Neural Network? (Possibly non exhaustive)",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Input layers structure, Learning rate, Activation function, Number of epochs",
+          "is_correct": false
+        },
+        {
+          "text": "Hidden layers structure, Learning rate, Activation function, Number of epochs",
+          "is_correct": true
+        },
+        {
+          "text": "Hidden layers structure, Output layer structure, Activation function, Number of epochs",
+          "is_correct": false
+        },
+        {
+          "text": "Network structure, Learning rate, Backpropagation algorithm, Number of epochs",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is different from the others?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Dbscan",
+          "is_correct": false
+        },
+        {
+          "text": "Decision Tree",
+          "is_correct": true
+        },
+        {
+          "text": "Neural Network",
+          "is_correct": false
+        },
+        {
+          "text": "SVM",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is the main reason for the standardization of numeric attributes?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Map all the numeric attributes to a new range such that the mean is zero and the variance is one",
+          "is_correct": true
+        },
+        {
+          "text": "Map all the nominal attributes to the same range, in order to prevent the values with higher frequency from having prevailing influence",
+          "is_correct": false
+        },
+        {
+          "text": "Change the distribution of the numeric attributes, in order to obtain gaussian distributions",
+          "is_correct": false
+        },
+        {
+          "text": "Remove non-standard values",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following measure can be used as an alternative to the Information Gain?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Jaccard Index",
+          "is_correct": false
+        },
+        {
+          "text": "Sihlouette Index",
+          "is_correct": false
+        },
+        {
+          "text": "Gini Index",
+          "is_correct": true
+        },
+        {
+          "text": "Rand Index",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is different from the others?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Decision Tree",
+          "is_correct": true
+        },
+        {
+          "text": "Apriori",
+          "is_correct": false
+        },
+        {
+          "text": "Expectation Maximisation",
+          "is_correct": false
+        },
+        {
+          "text": "K-means",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "How is the number of clusters determined in agglomerative clustering?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "By cutting the dendrogram at a certain height.",
+          "is_correct": true
+        },
+        {
+          "text": "By assigning each data point to a cluster based on the final structure obtained from the dendrogram",
+          "is_correct": false
+        },
+        {
+          "text": "By computing the pairwise similarity or distance between all clusters.",
+          "is_correct": false
+        },
+        {
+          "text": "By merging the closest clusters according to the defined distance metric.",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following clustering methods is not based on distances between objects?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Hierarchical Agglomerative",
+          "is_correct": false
+        },
+        {
+          "text": "DBSCAN",
+          "is_correct": false
+        },
+        {
+          "text": "Expectation Maximization",
+          "is_correct": true
+        },
+        {
+          "text": "K-Means",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is the support of the rule A,C->B?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "100%",
+          "is_correct": false
+        },
+        {
+          "text": "20%",
+          "is_correct": false
+        },
+        {
+          "text": "40%",
+          "is_correct": false
+        },
+        {
+          "text": "50%",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the Gini index?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "An impurity measure of a dataset alternative to the Information Gain and to the Misclassification Index",
+          "is_correct": true
+        },
+        {
+          "text": "An impurity measure of a dataset alternative to overfitting and underfitting",
+          "is_correct": false
+        },
+        {
+          "text": "An accuracy measure of a dataset alternative to the Information Gain and to the Misclassification Index",
+          "is_correct": false
+        },
+        {
+          "text": "A measure of the entropy of a dataset",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "When is polynomial regression appropriate?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "When it is necessary to project the data into a dimensional space",
+          "is_correct": false
+        },
+        {
+          "text": "When there is more than one predicting attribute",
+          "is_correct": false
+        },
+        {
+          "text": "When the target values are not linearly separable",
+          "is_correct": false
+        },
+        {
+          "text": "When the relationship between the predicting variable and the target cannot be approximated as linear",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following characteristic of data can reduce the effectiveness of DBSCAN?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Presence of outliers",
+          "is_correct": false
+        },
+        {
+          "text": "Presence of clusters with different densities",
+          "is_correct": true
+        },
+        {
+          "text": "Clusters have concavities",
+          "is_correct": false
+        },
+        {
+          "text": "All the variables are the same range of values",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Given the two binary vectors below, which is their similarity according to the Simple Matching Coefficient?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "0.5",
+          "is_correct": true
+        },
+        {
+          "text": "0.2",
+          "is_correct": false
+        },
+        {
+          "text": "0.1",
+          "is_correct": false
+        },
+        {
+          "text": "0.3",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Given the following definitions: TP = True Positives; TN = True Negatives; FP = False Positives; FN = False Negatives. Which of the formulas below computes the recall of a binary classifier?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "TP / (TP + FN)",
+          "is_correct": true
+        },
+        {
+          "text": "TN / (TN + FP)",
+          "is_correct": false
+        },
+        {
+          "text": "TP / (TP + FP)",
+          "is_correct": false
+        },
+        {
+          "text": "(TP + TN) / (TP + FP + TN + FN)",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What measure is maximised by the Expectation Maximization algorithm for clustering?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The likelihood the distributions, defined by the parameters found, given the data available",
+          "is_correct": true
+        },
+        {
+          "text": "The likelihood of an example",
+          "is_correct": false
+        },
+        {
+          "text": "The support of a class",
+          "is_correct": false
+        },
+        {
+          "text": "The likelihood of an attribute, given the class label",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following is not an objective of feature selection",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Reduce the effect of noise",
+          "is_correct": false
+        },
+        {
+          "text": "Avoid the curse of dimensionality",
+          "is_correct": false
+        },
+        {
+          "text": "Reduce time and memory complexity of the mining algorithms",
+          "is_correct": false
+        },
+        {
+          "text": "Select the features with higher range, which have more influence on the computation",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is the effect of the curse of dimensionality",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "When the number of dimensions increases the computing power necessary to compute the distances becomes too high",
+          "is_correct": false
+        },
+        {
+          "text": "When the number of dimensions increases the classifiers cannot be correctly tuned",
+          "is_correct": false
+        },
+        {
+          "text": "When the number of dimensions increases the euclidean distance becomes less effective to discriminate between points in the space",
+          "is_correct": true
+        },
+        {
+          "text": "When the number of dimensions increases the results tend to be prone to overfitting",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following situations could suggest the use of MinMax scaling? (also known as \"rescaling')",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "There are attributes with very skewed data distributions",
+          "is_correct": false
+        },
+        {
+          "text": "There are numeric attributes with very diverse value ranges",
+          "is_correct": true
+        },
+        {
+          "text": "There is a numeric attribute with values spread in a very large range",
+          "is_correct": false
+        },
+        {
+          "text": "There are attrtbutes with a very large number of missing values",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following is a strength of the clustering algorithm DBSCAN?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Ability to separate outliers from regular data",
+          "is_correct": true
+        },
+        {
+          "text": "Very fast by computation",
+          "is_correct": false
+        },
+        {
+          "text": "Ability to find cluster with concavities",
+          "is_correct": true
+        },
+        {
+          "text": "Requires to set the number of clusters as a parameter",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "In a decision tree, an attribute which is used only in nodes near the leaves...",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "... guarantees high increment of purity",
+          "is_correct": false
+        },
+        {
+          "text": "... is irrelevant with respect to the target",
+          "is_correct": false
+        },
+        {
+          "text": "... gives little insight with respect to the target",
+          "is_correct": true
+        },
+        {
+          "text": "... has a high correlation with respect to the target",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What measure is maximised by the Expectation Maximisation algorithm for clustering?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The likelihood of a class label, given the attributes of the example",
+          "is_correct": true
+        },
+        {
+          "text": "The support of a class",
+          "is_correct": false
+        },
+        {
+          "text": "The likelihood of an example",
+          "is_correct": false
+        },
+        {
+          "text": "The likelihood of an attribute, given the class label",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which is different from the others?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Dbscan",
+          "is_correct": false
+        },
+        {
+          "text": "K-means",
+          "is_correct": false
+        },
+        {
+          "text": "Decision Tree",
+          "is_correct": true
+        },
+        {
+          "text": "Expectation Maximisation",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "When training a neural network, what is the learning rate?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "The slope of the activation function in a specific node",
+          "is_correct": false
+        },
+        {
+          "text": "A multiplying factor of the correction to be applied to the connection weights",
+          "is_correct": true
+        },
+        {
+          "text": "The ratio between the size of the hidden layer and the input layer of the network",
+          "is_correct": false
+        },
+        {
+          "text": "The speed of convergence to a stable solution during the learning process",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "(refer to the image) 33%, 100%, 50%, 20%",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "33%",
+          "is_correct": true
+        },
+        {
+          "text": "100%",
+          "is_correct": false
+        },
+        {
+          "text": "50%",
+          "is_correct": false
+        },
+        {
+          "text": "20%",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the statements below best describes the strategy of Apriori in finding the frequent itemsets?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "Evaluation of the support of the itemsets in an order such that uninteresting parts of the search space are pruned as soon as possible",
+          "is_correct": true
+        },
+        {
+          "text": "Evaluation of the confidence of the itemsets in an order such that uninteresting parts of the search space are pruned as soon as possible",
+          "is_correct": false
+        },
+        {
+          "text": "Evaluation of the support of the itemsets in an order such that uninteresting parts of the search space are considered only at the end of the execution",
+          "is_correct": false
+        },
+        {
+          "text": "Evaluation of the support of the itemsets in an order such that the interesting parts of the search space are pruned as soon as possible",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "A Decision Tree is...",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "A tree-structured plan of tests on multiple attributes to forecast the target",
+          "is_correct": false
+        },
+        {
+          "text": "A tree-structured plan of tests on single attributes to obtain the maximum purity of a node",
+          "is_correct": false
+        },
+        {
+          "text": "A tree-structured plan of tests on single attributes to forecast the target",
+          "is_correct": true
+        },
+        {
+          "text": "A tree-structured plan of tests on single attributes to forecast the cluster",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "What is the single linkage?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "A method to compute the separation of the objects inside a cluster",
+          "is_correct": false
+        },
+        {
+          "text": "A method to compute the distance between two objects, it can be used in hierarchical clustering",
+          "is_correct": false
+        },
+        {
+          "text": "A method to compute the distance between two classes, it can be used in decision trees",
+          "is_correct": false
+        },
+        {
+          "text": "A method to compute the distance between two sets of items, it can be used in hierarchical clustering",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "With reference to the total sum of squared errors and separation of a clustering scheme, which of the statements below is true?",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "They are two ways to measure the same thing",
+          "is_correct": false
+        },
+        {
+          "text": "They are strictly correlated, if, changing the clustering scheme, one increases, then the other does the same",
+          "is_correct": false
+        },
+        {
+          "text": "It is possible to optimise them (i.e. minimise SSE and maximise SSB) separately",
+          "is_correct": false
+        },
+        {
+          "text": "They are strictly correlated, if, changing the clustering scheme, one increases, then the other decres",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Which of the following preprocessing activities is useful to build a Naive Bayes classifier if the independence hypothesis is violated:",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "Discretisation",
+          "is_correct": false
+        },
+        {
+          "text": "Normalisation",
+          "is_correct": false
+        },
+        {
+          "text": "Standardisation",
+          "is_correct": false
+        },
+        {
+          "text": "Feature selection",
+          "is_correct": true
+        }
+      ]
+    },
+
+    {
+      "question_text": "Given the two binary vectors below, which is their similarity according to the Jaccard Coefficient?",
+      "is_multiple_choice": false,
+      "answers": [
+        {
+          "text": "0.5",
+          "is_correct": false
+        },
+        {
+          "text": "0.375",
+          "is_correct": true
+        },
+        {
+          "text": "0.2",
+          "is_correct": false
+        },
+        {
+          "text": "0.1",
+          "is_correct": false
+        }
+      ]
+    },
+
+    {
+      "question_text": "The Information Gain is used to",
+      "is_multiple_choice": true,
+      "answers": [
+        {
+          "text": "select the attribute which maximises, for a given test set, the ability to predict the class value",
+          "is_correct": false
+        },
+        {
+          "text": "select the attribute which maximises, for a given training set, the ability to predict the class value",
+          "is_correct": true
+        },
+        {
+          "text": "select the class with maximum probability",
+          "is_correct": false
+        },
+        {
+          "text": "select the attribute which maximises, for a given training set, the ability to predict all the other attribute values",
+          "is_correct": false
+        }
+      ]
+    }
+
+  ]
+}
