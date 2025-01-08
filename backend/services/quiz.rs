@@ -14,7 +14,7 @@ use diesel::{
     prelude::*,
     r2d2::{ConnectionManager, PooledConnection},
 };
-use getrandom::getrandom;
+use rand::Rng;
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
@@ -23,17 +23,8 @@ pub struct QuizStarterParams {
 }
 
 fn realrnd(max: u16) -> u16 {
-    let mut buf = [0u8; 2];
-
-    loop {
-        getrandom(&mut buf).unwrap();
-
-        let rnd = u16::from_be_bytes(buf);
-
-        if rnd <= max {
-            return rnd;
-        }
-    }
+    let mut rng = rand::thread_rng();
+    rng.gen_range(0..=max)
 }
 
 #[get("")]
