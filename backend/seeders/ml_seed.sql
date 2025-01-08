@@ -630,7 +630,17 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 -- DOMANDA 42
 INSERT INTO questions (question, category_id, is_multiple_choice)
 VALUES (
-  '(refer to the image) 40%, 20%, 50%, 100%',
+  '(refer to the image) 40%, 20%, 50%, 100%
+Consider the transactional dataset below
+ID Items
+1 A,B,C
+2 A,B,D
+3 B,D,E
+4 C,D
+5 A,C,D,E
+Which is the confidence of the rule
+A,C → B
+',
   4,
   1
 );
@@ -874,7 +884,14 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 -- DOMANDA 58
 INSERT INTO questions (question, category_id, is_multiple_choice)
 VALUES (
-  'Which is the support of the rule A,C->B?',
+  'Consider the transactional dataset below:
+ID Items
+1 A,B,C
+2 A,B,D
+3 B,D,E
+4 C,D
+5 A,C,D,E
+  Which is the support of the rule A,C->B?',
   4,
   1
 );
@@ -934,7 +951,11 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 -- DOMANDA 62
 INSERT INTO questions (question, category_id, is_multiple_choice)
 VALUES (
-  'Given the two binary vectors below, which is their similarity according to the Simple Matching Coefficient?',
+  'Given the two binary vectors below, which is their similarity according to the Simple Matching Coefficient?
+abcdef ghij
+1000101101
+1011101010
+',
   4,
   1
 );
@@ -1099,7 +1120,16 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 -- DOMANDA 73
 INSERT INTO questions (question, category_id, is_multiple_choice)
 VALUES (
-  '(refer to the image) 33%, 100%, 50%, 20%',
+  '(refer to the image) 33%, 100%, 50%, 20%
+Consider the transactional dataset below
+ID Items
+1 A,B,C
+2 A,B,D
+3 B,D,E
+4 C,D
+5 A,C,D,E
+Which is the confidence of the rule B → E?
+',
   4,
   1
 );
@@ -1189,7 +1219,11 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 -- DOMANDA 79
 INSERT INTO questions (question, category_id, is_multiple_choice)
 VALUES (
-  'Given the two binary vectors below, which is their similarity according to the Jaccard Coefficient?',
+  'Given the two binary vectors below, which is their similarity according to the Jaccard Coefficient?
+abcdef ghij
+1000101101
+1011101010
+  ',
   4,
   1
 );

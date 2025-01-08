@@ -25,22 +25,6 @@ export const QuizRowMultipleChoice = ({
 			.filter((id): id is number => id !== undefined)
 	);
 
-	const handleAnswer = (_answer: number[]) => {
-		if (_answer === answer) {
-			setAnswer(undefined);
-			set(state?.filter((a) => a.question_id !== q.id) as QuizAnswer[]);
-			return;
-		}
-
-		setAnswer(_answer);
-		set(
-			_answer.map((a) => ({
-				question_id: q.id,
-				answer_id: a,
-			}))
-		);
-	};
-
 	return (
 		<li className={classNames('brutal-border relative py-4', className)}>
 			<div className="flex">
@@ -86,13 +70,22 @@ export const QuizRowMultipleChoice = ({
 											? 'brutal-btn'
 											: 'opacity-30'
 									}`}
-									onClick={() => handleAnswer(
-										answer === undefined
-											? [a.id]
-											: answer.includes(a.id)
-											? answer.filter((id) => id !== a.id)
-											: [...answer, a.id]
-									)}
+									onClick={() => {
+										const newAnswers =
+											answer === undefined
+												? [a.id]
+												: answer.includes(a.id)
+												? answer.filter((id) => id !== a.id)
+												: [...answer, a.id];
+
+										setAnswer(newAnswers);
+										set(
+											newAnswers.map((a) => ({
+												question_id: q.id,
+												answer_id: a,
+											}))
+										);
+									}}
 								>
 									✅
 								</button>

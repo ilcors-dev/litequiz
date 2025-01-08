@@ -35,7 +35,7 @@ export const Quiz = () => {
 	const handleAnswerToggle = (answer: QuizAnswer) => {
 		if (answer.answer === null) {
 			const newAnswers = answers.filter(
-				(a) => a.question_id !== answer.question_id
+				(a) => a.question_id !== answer.question_id && a.answer_id !== answer.answer_id
 			);
 			setAnswers(newAnswers);
 			return;
@@ -43,7 +43,7 @@ export const Quiz = () => {
 
 		const index = answers.findIndex(
 			(a) =>
-				a.question_id === answer.question_id && a.answer_id === answer.answer_id
+				a.answer_id === answer.answer_id || a.question_id === answer.question_id
 		);
 
 		if (index === -1) {
