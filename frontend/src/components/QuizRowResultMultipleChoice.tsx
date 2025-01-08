@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
+import ExplainAnswerAi from './ExplainAnswerAi';
 
 interface Props {
 	i: number;
@@ -37,7 +38,9 @@ export const QuizRowResultMultipleChoice = ({
 										className={classNames(
 											`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow`,
 											{
-												'brutal-btn bg-green-300': correctAnswers?.includes(a.id),
+												'brutal-btn bg-green-300': correctAnswers?.includes(
+													a.id
+												),
 											}
 										)}
 									>
@@ -60,6 +63,13 @@ export const QuizRowResultMultipleChoice = ({
 					))}
 				</ul>
 			</div>
+			<hr />
+			<ExplainAnswerAi
+				className="px-6 py-4"
+				question={q.question}
+				choices={choices}
+				correctAnswers={correctAnswers ?? []}
+			/>
 		</li>
 	);
 };
