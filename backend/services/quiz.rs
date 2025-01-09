@@ -14,17 +14,12 @@ use diesel::{
     prelude::*,
     r2d2::{ConnectionManager, PooledConnection},
 };
-use rand::Rng;
+use rand::{seq::SliceRandom, thread_rng};
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
 pub struct QuizStarterParams {
     pub category_id: i32,
-}
-
-fn realrnd(max: u16) -> u16 {
-    let mut rng = rand::thread_rng();
-    rng.gen_range(0..=max)
 }
 
 #[get("")]
@@ -71,28 +66,19 @@ async fn index(
     };
 
     if result.is_ok() {
-        let q: Vec<PartialQuestion> = result.unwrap();
+        let mut q: Vec<PartialQuestion> = result.unwrap();
         let mut items: Vec<WithHiddenAnswer> = Vec::new();
 
         // if the quiz is not active we should shuffle the q and save them in the session, otherwise keep them
         // as they are
         if !has_quiz {
-            loop {
-                if items.len() == questions_per_quiz as usize {
-                    break;
-                }
+            let mut rng = thread_rng();
+            q.shuffle(&mut rng);
 
-                let item = q
-                    .get(realrnd(q.len().try_into().unwrap()) as usize)
-                    .unwrap();
+            q.truncate(questions_per_quiz as usize);
 
-                let is_dup = items
-                    .iter()
-                    .any(|i| i.id == item.id || i.question == item.question);
-
-                if !is_dup {
-                    add_question_with_hidden_answer(&item, &mut con, &mut items);
-                }
+            for item in q.iter() {
+                add_question_with_hidden_answer(&item, &mut con, &mut items);
             }
         } else {
             for item in q.into_iter() {
