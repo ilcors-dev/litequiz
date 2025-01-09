@@ -1,14 +1,17 @@
 import classNames from 'classnames';
+import { uniq } from 'lodash';
 import { useId, useState } from 'react';
+import { UseFormSetValue } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import { useQuizStatusApi } from '../apis/useQuizStatusApi';
 
 interface Props {
 	i: number;
 	q: WithHiddenAnswer;
 	className: string;
 	state?: QuizAnswer[];
-	set: (answer: QuizAnswer[]) => void;
+	setValue: UseFormSetValue<{ answers: QuizAnswer[] }>;
 }
 
 export const QuizRowMultipleChoice = ({
@@ -16,14 +19,9 @@ export const QuizRowMultipleChoice = ({
 	className,
 	i,
 	state,
-	set,
+	setValue,
 }: Props) => {
 	const id = useId();
-	const [answer, setAnswer] = useState<number[] | undefined>(
-		state
-			?.map((a) => a.answer_id)
-			.filter((id): id is number => id !== undefined)
-	);
 
 	return (
 		<li className={classNames('brutal-border relative py-4', className)}>
@@ -56,7 +54,7 @@ export const QuizRowMultipleChoice = ({
 					#{i}
 				</span>
 
-				<p className="my-auto">{q.question}</p>
+				<p className="my-auto whitespace-pre-line">{q.question}</p>
 			</div>
 			<div className={classNames('mt-2 px-6', { flex: !q.is_multiple_choice })}>
 				<ul>
@@ -66,25 +64,36 @@ export const QuizRowMultipleChoice = ({
 							<div className="mr-2 ml-auto inline-flex items-center space-x-2 pl-2">
 								<button
 									className={`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow ${
-										answer !== undefined && answer.includes(a.id)
+										state !== undefined &&
+										state.map((a) => a.answer_id).includes(a.id)
 											? 'brutal-btn'
 											: 'opacity-30'
 									}`}
 									onClick={() => {
-										const newAnswers =
-											answer === undefined
-												? [a.id]
-												: answer.includes(a.id)
-												? answer.filter((id) => id !== a.id)
-												: [...answer, a.id];
-
-										setAnswer(newAnswers);
-										set(
-											newAnswers.map((a) => ({
-												question_id: q.id,
-												answer_id: a,
-											}))
+										const exists = state?.findIndex(
+											(ans) => ans.answer_id === a.id
 										);
+
+										let newState = state as QuizAnswer[];
+
+										if (exists === -1) {
+											newState = [
+												...(state?.map((ans) => ({
+													question_id: ans.question_id,
+													answer_id: ans.answer_id,
+												})) ?? []),
+												{
+													question_id: q.id,
+													answer_id: a.id,
+												},
+											];
+										} else {
+											newState =
+												state?.filter((ans) => ans.answer_id !== a.id) ?? [];
+										}
+
+										setValue('answers', newState);
+										useQuizStatusApi().post(newState);
 									}}
 								>
 									✅

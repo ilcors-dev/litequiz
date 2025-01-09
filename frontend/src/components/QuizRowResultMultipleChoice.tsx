@@ -40,7 +40,8 @@ export const QuizRowResultMultipleChoice = ({
 											{
 												'brutal-btn bg-green-300': correctAnswers?.includes(
 													a.id
-												),
+												) && givenAnswers?.includes(a.id),
+												'brutal-btn bg-orange-300': correctAnswers?.includes(a.id) && !givenAnswers?.includes(a.id),
 											}
 										)}
 									>
