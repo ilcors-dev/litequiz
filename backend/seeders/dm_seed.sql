@@ -338,8 +338,8 @@ VALUES ('Rank the technologies for increasing level of abstraction (1 = most spe
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
-('SQL queries on operational databases', 0, (SELECT id FROM question_id)),
-('Data mining on operational databases', 1, (SELECT id FROM question_id)),
+('SQL queries on operational databases', 1, (SELECT id FROM question_id)),
+('Data mining on operational databases', 0, (SELECT id FROM question_id)),
 ('OLAP Analysis on Data Mart', 0, (SELECT id FROM question_id));
 
 -- DOMANDA 28
@@ -361,7 +361,7 @@ WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
 ('SQL queries on operational databases', 0, (SELECT id FROM question_id)),
-('Data mining on operational databases', 0, (SELECT id FROM question_id)),
+('Data mining on operational databases', 1, (SELECT id FROM question_id)),
 ('OLAP Analysis on Data Mart', 0, (SELECT id FROM question_id));
 
 -- DOMANDA 30
