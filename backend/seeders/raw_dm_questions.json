@@ -1,0 +1,707 @@
+[
+  {
+    "question": "Which of the texts describes the DFM schema below?\nImmagine senza didascalia\nWe need to track the purchases with credit cards. Each purchase has an amount, an exchange and a credit limit. The purchases are done in a date and i a store of a given type and country; stores have also an area. Purchasees have a card name (e.g. MyCard or JeansCard), card_names have a card type (e.g. credit or debit). Card types have also an issuing bank adnd a country.",
+    "answers": [
+      {
+        "text": "We need to track the purchases with credit cards. Each puchase has an amount, an exchange and a credit limit. The purchases are done in a date and in a store of a given type; stores types have also a country and an area. Purchases have a card type (e.g. credit or debit) and a card name (e.g. MyCard or JeansCard). Card names have also ain issuing bank and a country.",
+        "is_correct": false
+      },
+      {
+        "text": "We need to track the purchases with credit cards. Each purchase has an amount, an exchange and a credit limit. The purchases are done in a date and in a store of a given type; stores have also a country and an area. Purchases have a card type (e.g. credit or debit) and a card name (e.g. MyCard or JeansCard). Card types have also an issuing bank and a country.",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Which of the definition below describes the OLAP operation Drill-Down",
+    "answers": [
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": false
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Select the sentences describing a characteristic of a Data Warehouse",
+    "answers": [
+      {
+        "text": "Includes all the base data in their native format",
+        "is_correct": false
+      },
+      {
+        "text": "Non volatile",
+        "is_correct": true
+      },
+      {
+        "text": "Includes the time dimension",
+        "is_correct": true
+      },
+      {
+        "text": "Solves the inconsistencies",
+        "is_correct": true
+      },
+      {
+        "text": "Constantly updated as soon as the base data are updated",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the definition below describes the OLAP operation Pivot",
+    "answers": [
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": false
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Check the features of Data Lakes in comparison with Data Warehouses, Multiple answers allowed. Selecting a wrong option will be penalised",
+    "answers": [
+      {
+        "text": "Can run on less expensive HW/SW",
+        "is_correct": true
+      },
+      {
+        "text": "Do not enforce data quality",
+        "is_correct": true
+      },
+      {
+        "text": "More complex management",
+        "is_correct": false
+      },
+      {
+        "text": "Completely defined use cases",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Talking about the general idea of database, what is the purpose of the \"Schema on write\" strategy?",
+    "answers": [
+      {
+        "text": "Optimisation for specific types of queries",
+        "is_correct": true
+      },
+      {
+        "text": "Clean design of the data structure",
+        "is_correct": true
+      },
+      {
+        "text": "Avoid preprocessing of data before writing",
+        "is_correct": false
+      },
+      {
+        "text": "Flexibility and efficiency for any kind of query",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Talking about the general idea of database, what is the meaning of \"Schema on read\"?",
+    "answers": [
+      {
+        "text": "Create a schema for data after reading them from the database",
+        "is_correct": true
+      },
+      {
+        "text": "Write the raw data in the database, then at reading time shape then according to the reader's needs",
+        "is_correct": true
+      },
+      {
+        "text": "Change the schema of the data before each read",
+        "is_correct": false
+      },
+      {
+        "text": "Read the schema of the data before each data read",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the following are typical data warehouse queries?",
+    "answers": [
+      {
+        "text": "What is the total revenue of yesterday in shop \"BO03\"?",
+        "is_correct": false
+      },
+      {
+        "text": "What is the total revenue per product category and state?",
+        "is_correct": true
+      },
+      {
+        "text": "Which products maximize the profit?",
+        "is_correct": true
+      },
+      {
+        "text": "What is the relationship between profits gained by products \"WWW\" and \"ZZZ\"?",
+        "is_correct": true
+      },
+      {
+        "text": "Which is the stock of product \"XXX\" in the \"YYY\" warehouse",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the following sentences describes an advantage of a Data Warehouse with respect to a standard DBMS",
+    "answers": [
+      {
+        "text": "Has tools for helping to solve inconsistencies",
+        "is_correct": true
+      },
+      {
+        "text": "Allows efficient execution of key-based queries",
+        "is_correct": false
+      },
+      {
+        "text": "Allows efficient execution of multi-dimensional queries",
+        "is_correct": true
+      },
+      {
+        "text": "Manages efficiently data updates",
+        "is_correct": false
+      },
+      {
+        "text": "Allows analysis along the time dimension",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Which of the definitions below refers to \"Drill across\"?\n(Originally from: Link the names of the OLAP operations below to their definitions)",
+    "answers": [
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": true
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, in order to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the definitions below refers to \"Roll-up\"?\n(Originally from: Link the names of the OLAP operations below to their definitions)",
+    "answers": [
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": false
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, in order to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Which of the definitions below refers to \"Drill down\"?\n(Originally from: Link the names of the OLAP operations below to their definitions)",
+    "answers": [
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": false
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, in order to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": true
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the definitions below refers to \"Pivot\"?\n(Originally from: Link the names of the OLAP operations below to their definitions)",
+    "answers": [
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": false
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, in order to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": true
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the definitions below refers to \"Slice dice\"?\n(Originally from: Link the names of the OLAP operations below to their definitions)",
+    "answers": [
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": true
+      },
+      {
+        "text": "Creates a link between concepts in interrelated cubes, in order to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level to a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which advantage is associated to Single Layer?\n(Originally from: Associate the various Data Warehouse Architectures to the respective advantages)",
+    "answers": [
+      {
+        "text": "The occupation of space is minimised",
+        "is_correct": true
+      },
+      {
+        "text": "The workloads for analysis and daily operations are separated",
+        "is_correct": false
+      },
+      {
+        "text": "An intermediate level of consolidated data is available",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which advantage is associated to Two Layers?\n(Originally from: Associate the various Data Warehouse Architectures to the respective advantages)",
+    "answers": [
+      {
+        "text": "The occupation of space is minimised",
+        "is_correct": false
+      },
+      {
+        "text": "The workloads for analysis and daily operations are separated",
+        "is_correct": true
+      },
+      {
+        "text": "An intermediate level of consolidated data is available",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which advantage is associated to Three Layers?\n(Originally from: Associate the various Data Warehouse Architectures to the respective advantages)",
+    "answers": [
+      {
+        "text": "The occupation of space is minimised",
+        "is_correct": false
+      },
+      {
+        "text": "The workloads for analysis and daily operations are separated",
+        "is_correct": false
+      },
+      {
+        "text": "An intermediate level of consolidated data is available",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Talking about the general idea of database, what is the meaning of \"Schema on write\"?",
+    "answers": [
+      {
+        "text": "Create a schema for data while writing into the database",
+        "is_correct": false
+      },
+      {
+        "text": "Create a schema for data before writing into the database",
+        "is_correct": true
+      },
+      {
+        "text": "Change the schema of the data after each write",
+        "is_correct": false
+      },
+      {
+        "text": "Create a schema for data after writing into the database",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "In which part of the CRISP methodology we perform the test design activity?",
+    "answers": [
+      {
+        "text": "Business Understanding",
+        "is_correct": false
+      },
+      {
+        "text": "Evaluation",
+        "is_correct": false
+      },
+      {
+        "text": "Data Understanding",
+        "is_correct": false
+      },
+      {
+        "text": "Modeling",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Which of the definition below describes the OLAP operation Roll-Up",
+    "answers": [
+      {
+        "text": "Creates a link between concepts in interrelated cubes, to compare them",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces the number of cube dimensions after setting one of the dimensions to a specific value",
+        "is_correct": false
+      },
+      {
+        "text": "Reduces data aggregation and adds a detail level in a hierarchy",
+        "is_correct": false
+      },
+      {
+        "text": "Causes an increase in data aggregation and removes a detail level in a hierarchy",
+        "is_correct": true
+      },
+      {
+        "text": "Changes the layout, in order to analyse a group of data from a different viewpoint",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Check the main objectives pursued when choosing a Data Lake architecture",
+    "answers": [
+      {
+        "text": "Store the data directly from the sources, as they are; the most appropriate structure will be decided later, according to the user needs",
+        "is_correct": true
+      },
+      {
+        "text": "The data must be accurately structured, in order to provide fast answers to complex queries",
+        "is_correct": false
+      },
+      {
+        "text": "The storage must be scalable and cheap, at the expenses of latency",
+        "is_correct": true
+      },
+      {
+        "text": "Ensure high quality of data through an accurate cleaning and transformation step",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Talking about ETL, which of the following activities is related to the Cleansing step?",
+    "answers": [
+      {
+        "text": "Association of a timestamp to the operational data",
+        "is_correct": false
+      },
+      {
+        "text": "Elimination of duplicates",
+        "is_correct": true
+      },
+      {
+        "text": "Snapshot of the operational data",
+        "is_correct": false
+      },
+      {
+        "text": "Usage of dictionaries to solve inconsistencies",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Order the ETL operations to obtain the correct sequence (1 = first, 4 = last)\nWhich is step #1?",
+    "answers": [
+      {
+        "text": "Transformation",
+        "is_correct": true
+      },
+      {
+        "text": "Loading",
+        "is_correct": false
+      },
+      {
+        "text": "Extraction",
+        "is_correct": false
+      },
+      {
+        "text": "Cleansing",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Order the ETL operations to obtain the correct sequence (1 = first, 4 = last)\nWhich is step #2?",
+    "answers": [
+      {
+        "text": "Transformation",
+        "is_correct": false
+      },
+      {
+        "text": "Loading",
+        "is_correct": true
+      },
+      {
+        "text": "Extraction",
+        "is_correct": false
+      },
+      {
+        "text": "Cleansing",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Order the ETL operations to obtain the correct sequence (1 = first, 4 = last)\nWhich is step #3?",
+    "answers": [
+      {
+        "text": "Transformation",
+        "is_correct": false
+      },
+      {
+        "text": "Loading",
+        "is_correct": false
+      },
+      {
+        "text": "Extraction",
+        "is_correct": true
+      },
+      {
+        "text": "Cleansing",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Order the ETL operations to obtain the correct sequence (1 = first, 4 = last)\nWhich is step #4?",
+    "answers": [
+      {
+        "text": "Transformation",
+        "is_correct": false
+      },
+      {
+        "text": "Loading",
+        "is_correct": false
+      },
+      {
+        "text": "Extraction",
+        "is_correct": false
+      },
+      {
+        "text": "Cleansing",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Rank the technologies for increasing level of abstraction (1 = most specific ... 3 = higher level):\nWhich one is Rank #1?",
+    "answers": [
+      {
+        "text": "SQL queries on operational databases",
+        "is_correct": false
+      },
+      {
+        "text": "Data mining on operational databases",
+        "is_correct": true
+      },
+      {
+        "text": "OLAP Analysis on Data Mart",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Rank the technologies for increasing level of abstraction (1 = most specific ... 3 = higher level):\nWhich one is Rank #2?",
+    "answers": [
+      {
+        "text": "SQL queries on operational databases",
+        "is_correct": false
+      },
+      {
+        "text": "Data mining on operational databases",
+        "is_correct": false
+      },
+      {
+        "text": "OLAP Analysis on Data Mart",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Rank the technologies for increasing level of abstraction (1 = most specific ... 3 = higher level):\nWhich one is Rank #3?",
+    "answers": [
+      {
+        "text": "SQL queries on operational databases",
+        "is_correct": false
+      },
+      {
+        "text": "Data mining on operational databases",
+        "is_correct": false
+      },
+      {
+        "text": "OLAP Analysis on Data Mart",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "What is Data Ingestion?",
+    "answers": [
+      {
+        "text": "A process that copies data from sources to a repository, taking care of possible differences in speed between the generation and the storing process",
+        "is_correct": true
+      },
+      {
+        "text": "A process that copies data from sources to a repository, ensuring high data quality",
+        "is_correct": false
+      },
+      {
+        "text": "A process that copies data from sources to a repository, making the transformation required by the user",
+        "is_correct": false
+      },
+      {
+        "text": "A process that copies data from sources to a Data Warehouse guaranteeing the correctness of data with respect to the schema",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question": "Which of the activities below is part of \"Business Understanding\" in the CRISP methodology?",
+    "answers": [
+      {
+        "text": "Which machine learning functions are necessary for my problem?",
+        "is_correct": false
+      },
+      {
+        "text": "Which data must be collected with a specific campaign?",
+        "is_correct": false
+      },
+      {
+        "text": "Which data are available?",
+        "is_correct": false
+      },
+      {
+        "text": "Which are the resources available (manpower, hardware, software, ...)",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Talking about the general idea of database, what is the purpose of the \"Schema on read\" strategy?",
+    "answers": [
+      {
+        "text": "Possibility to extract data in various shapes",
+        "is_correct": true
+      },
+      {
+        "text": "Optimisation for various types of queries",
+        "is_correct": false
+      },
+      {
+        "text": "Flexibility for any kind of query",
+        "is_correct": true
+      },
+      {
+        "text": "Avoid preprocessing of data before writing",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "question": "Talking about ETL, which of the following activities is related to the Extraction step?",
+    "answers": [
+      {
+        "text": "Snapshot of the operational data",
+        "is_correct": true
+      },
+      {
+        "text": "Elimination of duplicates",
+        "is_correct": false
+      },
+      {
+        "text": "Association of a timestamp to the operational data",
+        "is_correct": true
+      },
+      {
+        "text": "Usage of dictionaries to solve inconsistencies",
+        "is_correct": false
+      }
+    ]
+  }
+]
