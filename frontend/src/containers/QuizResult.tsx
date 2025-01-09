@@ -30,10 +30,16 @@ export const QuizResult = () => {
 					<span className="col-span-4">Correct answers</span>
 					<span className="col-span-8 text-xl font-semibold">
 						<span>
-							{solution.data?.correct_answers_count}/
+							{Number(solution.data?.correct_answers_count ?? 0).toFixed(2)}/
 							{solution.data?.total_questions}
 						</span>
-						<span>&nbsp;({solution.data?.correct_answers_percentage}%)</span>
+						<span>
+							&nbsp;(
+							{(Number(solution.data?.correct_answers_percentage) ?? 0).toFixed(
+								2
+							)}
+							%)
+						</span>
 					</span>
 				</div>
 				<div className="flex justify-between">
