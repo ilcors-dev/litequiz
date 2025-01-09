@@ -65,7 +65,7 @@ export const QuizRowMultipleChoice = ({
 								<button
 									className={`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow ${
 										state !== undefined &&
-										state.map((a) => a.answer_id).includes(a.id)
+										state?.map((a) => a.answer_id).includes(a.id)
 											? 'brutal-btn'
 											: 'opacity-30'
 									}`}
