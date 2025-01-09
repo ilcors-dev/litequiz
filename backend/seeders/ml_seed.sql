@@ -471,10 +471,10 @@ VALUES (
 );
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
-('O(D2)', 0, (SELECT id FROM question_id)),
+('O(D^2)', 0, (SELECT id FROM question_id)),
 ('O(D!)', 0, (SELECT id FROM question_id)),
 ('O(D)', 0, (SELECT id FROM question_id)),
-('O(2D)', 1, (SELECT id FROM question_id));
+('O(2^D)', 1, (SELECT id FROM question_id));
 
 
 -- DOMANDA 32
@@ -704,7 +704,12 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 -- DOMANDA 46
 INSERT INTO questions (question, category_id, is_multiple_choice)
 VALUES (
-  'Match the rule evaluation formulas with their names (Leverage, Lift, Confidence, Conviction)',
+  'Match the rule evaluation formulas with their names (Leverage, Lift, Confidence, Conviction)
+1. sup(AuC) - sup(A)sup(C)
+2. conf(A=>C) / sup(C)
+3. sup(A=>C) / sup(A)
+4. (1 - sup(C)) / (1 - conf(A=>C))
+  ',
   4,
   1
 );
@@ -898,9 +903,9 @@ ID Items
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
 ('100%', 0, (SELECT id FROM question_id)),
-('20%', 0, (SELECT id FROM question_id)),
+('20%', 1, (SELECT id FROM question_id)),
 ('40%', 0, (SELECT id FROM question_id)),
-('50%', 1, (SELECT id FROM question_id));
+('50%', 0, (SELECT id FROM question_id));
 
 
 -- DOMANDA 59
