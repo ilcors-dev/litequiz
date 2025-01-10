@@ -805,10 +805,10 @@ VALUES (
 );
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
-('Dbscan', 0, (SELECT id FROM question_id)),
+('Dbscan', 1, (SELECT id FROM question_id)),
 ('Decision Tree', 0, (SELECT id FROM question_id)),
 ('Neural Network', 0, (SELECT id FROM question_id)),
-('SVM', 1, (SELECT id FROM question_id));
+('SVM', 0, (SELECT id FROM question_id));
 
 
 -- DOMANDA 53

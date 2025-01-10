@@ -290,9 +290,9 @@ VALUES ('Order the ETL operations to obtain the correct sequence (1 = first, 4 =
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
-('Transformation', 1, (SELECT id FROM question_id)),
+('Transformation', 0, (SELECT id FROM question_id)),
 ('Loading', 0, (SELECT id FROM question_id)),
-('Extraction', 0, (SELECT id FROM question_id)),
+('Extraction', 1, (SELECT id FROM question_id)),
 ('Cleansing', 0, (SELECT id FROM question_id));
 
 -- DOMANDA 24
@@ -303,9 +303,9 @@ WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
 ('Transformation', 0, (SELECT id FROM question_id)),
-('Loading', 1, (SELECT id FROM question_id)),
+('Loading', 0, (SELECT id FROM question_id)),
 ('Extraction', 0, (SELECT id FROM question_id)),
-('Cleansing', 0, (SELECT id FROM question_id));
+('Cleansing', 1, (SELECT id FROM question_id));
 
 -- DOMANDA 25
 INSERT INTO questions (question, category_id, is_multiple_choice)
@@ -314,9 +314,9 @@ VALUES ('Order the ETL operations to obtain the correct sequence (1 = first, 4 =
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
-('Transformation', 0, (SELECT id FROM question_id)),
+('Transformation', 1, (SELECT id FROM question_id)),
 ('Loading', 0, (SELECT id FROM question_id)),
-('Extraction', 1, (SELECT id FROM question_id)),
+('Extraction', 0, (SELECT id FROM question_id)),
 ('Cleansing', 0, (SELECT id FROM question_id));
 
 -- DOMANDA 26
@@ -327,9 +327,9 @@ WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
 ('Transformation', 0, (SELECT id FROM question_id)),
-('Loading', 0, (SELECT id FROM question_id)),
+('Loading', 1, (SELECT id FROM question_id)),
 ('Extraction', 0, (SELECT id FROM question_id)),
-('Cleansing', 1, (SELECT id FROM question_id));
+('Cleansing', 0, (SELECT id FROM question_id));
 
 -- DOMANDA 27
 INSERT INTO questions (question, category_id, is_multiple_choice)

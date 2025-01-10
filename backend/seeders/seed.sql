@@ -4,3 +4,4 @@
 .read answers_insert.sql
 .read ml_seed.sql
 .read dm_seed.sql
+.read ro_seed.sql

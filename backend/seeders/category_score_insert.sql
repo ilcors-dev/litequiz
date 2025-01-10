@@ -10,6 +10,7 @@ INSERT INTO category_score_settings (answer_type,score,category_id) VALUES
     ('empty', 0, 3),
     ('correct', 0.5, 4),
     ('wrong', 0, 4),
-    ('empty', 0, 4);
-
-
+    ('empty', 0, 4),
+    ('correct', 2, 5),
+    ('wrong', 0, 5),
+    ('empty', 0, 5);
