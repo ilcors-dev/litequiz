@@ -14,7 +14,7 @@ use diesel::{
     prelude::*,
     r2d2::{ConnectionManager, PooledConnection},
 };
-use rand::{seq::SliceRandom, thread_rng};
+use rand::{rngs::OsRng, seq::SliceRandom};
 
 #[tsync::tsync]
 #[derive(serde::Deserialize)]
@@ -72,7 +72,7 @@ async fn index(
         // if the quiz is not active we should shuffle the q and save them in the session, otherwise keep them
         // as they are
         if !has_quiz {
-            let mut rng = thread_rng();
+            let mut rng = OsRng;
             q.shuffle(&mut rng);
 
             q.truncate(questions_per_quiz as usize);
