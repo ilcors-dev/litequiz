@@ -715,9 +715,9 @@ VALUES (
 );
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
-('Leverage -> 4, Lift -> 2, Confidence -> 3, Conviction -> 1', 1, (SELECT id FROM question_id)),
+('Leverage -> 4, Lift -> 2, Confidence -> 3, Conviction -> 1', 0, (SELECT id FROM question_id)),
 ('Leverage -> 3, Lift -> 1, Confidence -> 4, Conviction -> 2', 0, (SELECT id FROM question_id)),
-('Leverage -> 1, Lift -> 2, Confidence -> 3, Conviction -> 4', 0, (SELECT id FROM question_id)),
+('Leverage -> 1, Lift -> 2, Confidence -> 3, Conviction -> 4', 1, (SELECT id FROM question_id)),
 ('Leverage -> 2, Lift -> 3, Confidence -> 4, Conviction -> 1', 0, (SELECT id FROM question_id));
 
 

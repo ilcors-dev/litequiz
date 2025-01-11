@@ -131,8 +131,8 @@ VALUES ('Which of the definitions below refers to \"Drill across\"?\n(Originally
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id)
 VALUES
-('Reduces the number of cube dimensions after setting one of the dimensions to a specific value', 1, (SELECT id FROM question_id)),
-('Creates a link between concepts in interrelated cubes, in order to compare them', 0, (SELECT id FROM question_id)),
+('Reduces the number of cube dimensions after setting one of the dimensions to a sperific value', 0, (SELECT id FROM question_id)),
+('Creates a link between concepts in interrelated cubes, in order to compare them', 1, (SELECT id FROM question_id)),
 ('Changes the layout, in order to analyse a group of data from a different viewpoint', 0, (SELECT id FROM question_id)),
 ('Reduces data aggregation and adds a detail level to a hierarchy', 0, (SELECT id FROM question_id)),
 ('Causes an increase in data aggregation and removes a detail level in a hierarchy', 0, (SELECT id FROM question_id));

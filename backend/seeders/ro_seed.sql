@@ -1374,8 +1374,8 @@ VALUES (
 );
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
-('A. z(ILP) >= z(LP)', 0, (SELECT id FROM question_id)),
-('B. z(ILP) <= z(LP)', 1, (SELECT id FROM question_id)),
+('A. z(ILP) >= z(LP)', 1, (SELECT id FROM question_id)),
+('B. z(ILP) <= z(LP)', 0, (SELECT id FROM question_id)),
 ('C. z(ILP) < z(LP)', 0, (SELECT id FROM question_id)),
 ('D. z(ILP) > z(LP)', 0, (SELECT id FROM question_id)),
 ('E. z(ILP) = z(LP)', 0, (SELECT id FROM question_id));
@@ -1391,8 +1391,8 @@ VALUES (
 );
 WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
-('A. z(LP) >= z(ILP)', 1, (SELECT id FROM question_id)),
-('B. z(LP) <= z(ILP)', 0, (SELECT id FROM question_id)),
+('A. z(LP) >= z(ILP)', 0, (SELECT id FROM question_id)),
+('B. z(LP) <= z(ILP)', 1, (SELECT id FROM question_id)),
 ('C. z(LP) > z(ILP)', 0, (SELECT id FROM question_id)),
 ('D. z(LP) < z(ILP)', 0, (SELECT id FROM question_id)),
 ('E. z(LP) = z(ILP)', 0, (SELECT id FROM question_id));
