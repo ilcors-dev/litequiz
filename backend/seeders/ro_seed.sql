@@ -256,9 +256,9 @@ WITH question_id AS (SELECT last_insert_rowid() AS id)
 INSERT INTO answers (text, is_correct, question_id) VALUES
 ('A. infinite soluzioni se m = n', 0, (SELECT id FROM question_id)),
 ('B. infinite soluzioni se m > n', 0, (SELECT id FROM question_id)),
-('C. una sola soluzione se m = n', 0, (SELECT id FROM question_id)),
+('C. una sola soluzione se m = n', 1, (SELECT id FROM question_id)),
 ('D. una sola soluzione se m > n', 0, (SELECT id FROM question_id)),
-('E. nessuna delle precedenti', 1, (SELECT id FROM question_id));
+('E. nessuna delle precedenti', 0, (SELECT id FROM question_id));
 
 -- Correct answer: E
 
