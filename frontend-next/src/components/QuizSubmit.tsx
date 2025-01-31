@@ -11,11 +11,7 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 
-interface Props {
-  answers: QuizAnswer[];
-}
-
-export const QuizSubmit = ({ answers }: Props) => {
+export const QuizSubmit = () => {
   const submit = async () => {
     window.location.href = "/quiz-result";
   };

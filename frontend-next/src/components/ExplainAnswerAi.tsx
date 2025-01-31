@@ -2,7 +2,7 @@
 
 import classNames from "classnames";
 import React from "react";
-import { OllamaNoStreamResponse, useAi } from "../apis/useAi";
+import { OllamaNoStreamResponse, useAi } from "../hooks/useAi";
 import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
@@ -10,7 +10,7 @@ import "katex/dist/katex.min.css";
 
 interface Props {
   question: string;
-  choices: Answer[];
+  choices: Answers[];
   correctAnswers: number[];
 }
 
@@ -75,5 +75,7 @@ const ExplainAnswerAi = React.forwardRef<
     </div>
   );
 });
+
+ExplainAnswerAi.displayName = "ExplainAnswerAi";
 
 export default ExplainAnswerAi;

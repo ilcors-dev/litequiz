@@ -1,8 +1,6 @@
-import { useCategoryApi } from "@/apis/useCategoryApi";
-import { useQuizApi } from "@/apis/useQuizApi";
 import Form from "./form";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
+import { api } from "@/lib/axios";
 
 export const metadata: Metadata = {
   title: "Quiz",
@@ -19,9 +17,15 @@ export default async function Page({
     return null;
   }
 
-  const category = await useCategoryApi().show(+categoryId);
+  const category = await api
+    .get("showCategory", { categoryId: +categoryId })
+    .then((res) => res.data);
 
-  const questions = await useQuizApi().get(+categoryId);
+  const questions = await api
+    .get("getQuiz", { categoryId: +categoryId })
+    .then((res) => res.data);
+
+  const currentAnswers = await api.get("getQuizStatus").then((res) => res.data);
 
   if (!category) {
     return <div>Error loading category.</div>;
@@ -33,7 +37,11 @@ export default async function Page({
 
   return (
     <div className="container mx-auto">
-      <Form category={category} questions={questions} />
+      <Form
+        category={category}
+        questions={questions}
+        currentAnswers={currentAnswers}
+      />
     </div>
   );
 }

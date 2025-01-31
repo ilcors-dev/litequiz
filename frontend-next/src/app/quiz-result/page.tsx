@@ -1,7 +1,7 @@
-import { useQuizSolutionApi } from "@/apis/useQuizSolutionApi";
 import { QuizDestroy } from "@/components/QuizDestroy";
 import { QuizRowResult } from "@/components/QuizRowResult";
 import { QuizRowResultMultipleChoice } from "@/components/QuizRowResultMultipleChoice";
+import { api } from "@/lib/axios";
 import { uniqBy } from "lodash";
 
 export const metadata = {
@@ -9,14 +9,14 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const solution = await useQuizSolutionApi().get();
+  const solution = await api.get("getQuizSolution").then((res) => res.data);
 
   if (!solution) {
     return <div>Error loading solution.</div>;
   }
 
   return (
-    <div>
+    <div className="container mx-auto px-4 sm:px-0">
       <div className="sticky top-0 z-10 bg-white py-4">
         <div className="flex items-end space-x-4 bg-white py-4">
           <h1 className="text-4xl font-bold">Last quiz results</h1>

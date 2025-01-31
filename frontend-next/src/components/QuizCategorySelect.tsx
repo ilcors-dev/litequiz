@@ -17,7 +17,7 @@ export default function QuizCategorySelect({ categories }: Props) {
           name="quiz-category"
           id="quiz-category"
           value={selected?.toString()}
-          onChange={(e) => setSelected(+e.target.value)}
+          onChange={(e) => setSelected(e.target.value)}
         >
           {categories.map((c) => (
             <option value={c.id} key={c.id}>

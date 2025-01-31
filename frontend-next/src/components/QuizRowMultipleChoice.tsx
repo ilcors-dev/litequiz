@@ -1,12 +1,11 @@
 "use client";
 
+import { api } from "@/lib/axios";
 import classNames from "classnames";
-import { uniq } from "lodash";
-import { useId, useState } from "react";
+import { useId } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { useQuizStatusApi } from "../apis/useQuizStatusApi";
 
 interface Props {
   i: number;
@@ -94,7 +93,7 @@ export const QuizRowMultipleChoice = ({
                     }
 
                     setValue("answers", newState);
-                    useQuizStatusApi().post(newState);
+                    api.post("postQuizStatus", newState);
                   }}
                 >
                   ✅

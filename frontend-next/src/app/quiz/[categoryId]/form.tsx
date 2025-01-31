@@ -1,31 +1,24 @@
 "use client";
 
-import { useQuizStatusApi } from "@/apis/useQuizStatusApi";
 import { QuizDestroy } from "@/components/QuizDestroy";
 import { QuizRow } from "@/components/QuizRow";
 import { QuizRowMultipleChoice } from "@/components/QuizRowMultipleChoice";
 import { QuizSubmit } from "@/components/QuizSubmit";
 import { uniqBy } from "lodash";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface Props {
   category: Categories;
   questions: WithHiddenAnswer[];
+  currentAnswers: QuizAnswer[];
 }
 
-export default function Form({ category, questions }: Props) {
+export default function Form({ category, questions, currentAnswers }: Props) {
   const form = useForm({
     defaultValues: {
-      answers: [] as QuizAnswer[],
+      answers: currentAnswers,
     },
   });
-
-  useEffect(() => {
-    useQuizStatusApi()
-      .get()
-      .then((data) => form.setValue("answers", data));
-  }, []);
 
   return (
     <>
@@ -39,7 +32,7 @@ export default function Form({ category, questions }: Props) {
           }
           /{questions.length}
         </span>
-        <QuizSubmit answers={form.watch("answers")} />
+        <QuizSubmit />
       </div>
       <ol className="">
         {questions?.map((q, i) =>

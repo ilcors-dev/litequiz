@@ -3,8 +3,8 @@ import ExplainAnswerAi from "./ExplainAnswerAi";
 
 interface Props {
   i: number;
-  q: Question;
-  choices: Answer[];
+  q: Questions;
+  choices: Answers[];
   className: string;
   givenAnswers?: number[];
   correctAnswers?: number[];

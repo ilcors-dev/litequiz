@@ -1,6 +1,6 @@
 interface Props {
   i: number;
-  q: Question;
+  q: Questions;
   className: string;
   givenAnswer?: boolean;
   correctAnswer?: boolean;

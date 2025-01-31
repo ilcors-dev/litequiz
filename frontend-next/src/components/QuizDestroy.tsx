@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuizStatusApi } from "../apis/useQuizStatusApi";
+import { api } from "@/lib/axios";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,7 +19,7 @@ interface Props {
 
 export const QuizDestroy = ({ btnIcon, popupMessage }: Props) => {
   const deleteQuiz = async () => {
-    await useQuizStatusApi().destroy();
+    await api.delete("destroyQuiz");
     window.location.href = "/";
   };
 
