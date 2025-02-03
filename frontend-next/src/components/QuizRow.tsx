@@ -66,7 +66,7 @@ export const QuizRow = ({ q, className, i, state, setValue }: Props) => {
         <button
           className={`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow ${
             state !== undefined &&
-            state.find((s) => s.question_id === q.id)?.answer === true
+            state?.find((s) => s.question_id === q.id)?.answer === true
               ? "brutal-btn"
               : "opacity-30"
           }`}
@@ -77,7 +77,7 @@ export const QuizRow = ({ q, className, i, state, setValue }: Props) => {
         <button
           className={`h-12 w-12 rounded-lg hover:bg-yellow-300 hover:shadow ${
             state !== undefined &&
-            state.find((s) => s.question_id === q.id)?.answer === false
+            state?.find((s) => s.question_id === q.id)?.answer === false
               ? "brutal-btn"
               : "opacity-30"
           }`}

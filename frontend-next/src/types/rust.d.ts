@@ -26,6 +26,10 @@ interface CreateAnswers {
   text: string;
   /** Field representing column `is_correct` */
   is_correct: boolean;
+  /** Field representing column `created_at` */
+  created_at: Date;
+  /** Field representing column `updated_at` */
+  updated_at: Date;
 }
 
 /** Update Struct for a row in table `answers` for [`Answers`] */
@@ -78,6 +82,10 @@ interface CreateCategories {
   name: string;
   /** Field representing column `questions_per_quiz` */
   questions_per_quiz: number;
+  /** Field representing column `created_at` */
+  created_at: Date;
+  /** Field representing column `updated_at` */
+  updated_at: Date;
 }
 
 /** Update Struct for a row in table `categories` for [`Categories`] */
@@ -132,6 +140,10 @@ interface CreateCategoryScoreSettings {
   score: number;
   /** Field representing column `category_id` */
   category_id: number;
+  /** Field representing column `created_at` */
+  created_at: Date;
+  /** Field representing column `updated_at` */
+  updated_at: Date;
 }
 
 /** Update Struct for a row in table `category_score_settings` for [`CategoryScoreSettings`] */
@@ -196,6 +208,10 @@ interface CreateQuestions {
   is_multiple_choice: boolean;
   /** Field representing column `verified` */
   verified: boolean;
+  /** Field representing column `created_at` */
+  created_at: Date;
+  /** Field representing column `updated_at` */
+  updated_at: Date;
 }
 
 /** Update Struct for a row in table `questions` for [`Questions`] */
@@ -271,8 +287,8 @@ interface CategoryWithQuestionCount {
   question_count: number;
 }
 
-interface QuizStarterParams {
-  category_id: number;
+interface CategoryScoreSettingsPayload {
+  scores: Array<CategoryScoreSettings>;
 }
 
 interface QuizSolution {

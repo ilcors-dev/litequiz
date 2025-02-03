@@ -6,6 +6,7 @@ use axum::extract::{self, Path};
 use axum::http::StatusCode;
 use axum::response::IntoResponse;
 use axum::Extension;
+use chrono::Utc;
 use diesel::associations::HasTable;
 use diesel::{ExpressionMethods, QueryDsl, RunQueryDsl};
 
@@ -31,12 +32,24 @@ pub async fn show(
     (StatusCode::OK, axum::Json(cat.unwrap())).into_response()
 }
 
+#[derive(serde::Deserialize)]
+#[tsync::tsync]
+pub struct CategoryScoreSettingsPayload {
+    scores: Vec<CategoryScoreSettings>,
+}
+
 pub async fn store(
     db: Extension<Arc<DbPool>>,
-    extract::Json(form): extract::Json<Vec<CategoryScoreSettings>>,
+    extract::Json(form): extract::Json<CategoryScoreSettingsPayload>,
 ) -> impl IntoResponse {
     use crate::schema::category_score_settings::dsl::*;
     let mut con = db.get().expect("Failed to get connection");
+
+    if form.scores.is_empty() {
+        return (StatusCode::BAD_REQUEST).into_response();
+    }
+
+    let form = form.scores;
 
     for item in form.iter() {
         if !ALLOWED_ANSWERS.contains(&item.answer_type.as_str()) {
@@ -63,16 +76,17 @@ pub async fn store(
         let result = CategoryScoreSettings::create(
             &mut con,
             &CreateCategoryScoreSettings {
-                id: last_id,
+                id: last_id + 1,
                 category_id: item.category_id,
                 answer_type: item.answer_type.clone(),
                 score: item.score,
-                created_at: chrono::NaiveDateTime::from_timestamp(0, 0),
-                updated_at: chrono::NaiveDateTime::from_timestamp(0, 0),
+                created_at: Utc::now().naive_utc(),
+                updated_at: Utc::now().naive_utc(),
             },
         );
 
         if result.is_err() {
+            println!("{:?}", result);
             return (StatusCode::INTERNAL_SERVER_ERROR).into_response();
         }
     }

@@ -55,7 +55,7 @@ type Routes = {
     url: `/api/category-score-settings/${number}`;
     method: "POST";
     params: { category_id: number };
-    body: CategoryScoreSettings[];
+    body: CategoryScoreSettingsPayload;
     response: void;
   };
 

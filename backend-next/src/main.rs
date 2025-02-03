@@ -103,7 +103,7 @@ async fn main() {
             get(services::category_score_settings::show),
         )
         .route(
-            "/api/category-score-settings/",
+            "/api/category-score-settings/{category_score_settings_id}",
             post(services::category_score_settings::store),
         )
         .route("/api/quiz-solution", get(services::quiz_solution::get))

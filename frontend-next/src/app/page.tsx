@@ -20,9 +20,9 @@ export default async function Page() {
     const isServer = typeof window === "undefined";
 
     if (isServer) {
-      redirect(`${quizStatus.data.category.id}/quiz`);
+      redirect(`quiz/${quizStatus.data.category.id}`);
     } else {
-      window.location.href = `${quizStatus.data.category.id}/quiz`;
+      window.location.href = `quiz/${quizStatus.data.category.id}`;
     }
   }
 
