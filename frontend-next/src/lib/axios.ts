@@ -1,7 +1,13 @@
 import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const api_url = process.env.NEXT_PUBLIC_API_URL;
+const api_url =
+  typeof window === "undefined"
+    ? process.env.NEXT_PUBLIC_API_URL
+    : process.env.NEXT_PUBLIC_API_URL_BROWSER;
 const app_url = process.env.NEXT_PUBLIC_APP_URL;
+
+console.log("API URL: ", api_url);
+console.log("APP URL: ", app_url);
 
 type Routes = {
   getSession: {
@@ -16,11 +22,6 @@ type Routes = {
     method: "GET";
     params: { categoryId: number };
     response: WithHiddenAnswer[];
-  };
-  destroyQuiz: {
-    url: `/api/quiz`;
-    method: "DELETE";
-    response: void;
   };
 
   // Categories API
@@ -92,7 +93,6 @@ type Routes = {
 const routeMap: Record<keyof Routes, string> = {
   getSession: app_url + "/api/session",
   getQuiz: api_url + "/api/quiz/:categoryId",
-  destroyQuiz: api_url + "/api/quiz",
   getCategories: api_url + "/api/categories",
   showCategory: api_url + "/api/categories/:categoryId",
   updateCategory: api_url + "/api/categories/:categoryId",

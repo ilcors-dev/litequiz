@@ -1,5 +1,5 @@
 use axum::http::header::{AUTHORIZATION, CONTENT_TYPE};
-use axum::http::Method;
+use axum::http::{HeaderName, Method};
 use axum::response::IntoResponse;
 use axum::routing::{delete, post, put};
 use axum::{http::HeaderValue, response::Html, routing::get, Extension, Router};
@@ -27,8 +27,8 @@ pub type DbPool = r2d2::Pool<ConnectionManager<SqliteConnection>>;
 // Function to establish the SQLite connection pool
 pub fn establish_connection_pool() -> DbPool {
     dotenv().ok();
-    let database_url = env::var("DATABASE_URL")
-        .unwrap_or_else(|_| "./backend-next/database/db.sqlite".to_string());
+    let database_url =
+        env::var("DATABASE_URL").unwrap_or_else(|_| "./database/db.sqlite".to_string());
     let manager = ConnectionManager::<SqliteConnection>::new(database_url);
     r2d2::Pool::builder()
         .build(manager)
@@ -58,7 +58,11 @@ async fn main() {
     let cors = CorsLayer::new()
         .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
         .allow_methods([Method::GET, Method::POST, Method::PUT, Method::DELETE])
-        .allow_headers([CONTENT_TYPE, AUTHORIZATION])
+        .allow_headers([
+            CONTENT_TYPE,
+            AUTHORIZATION,
+            "X-Requested-With".parse::<HeaderName>().unwrap(),
+        ])
         .allow_credentials(true);
 
     let session_store = MemoryStore::default();

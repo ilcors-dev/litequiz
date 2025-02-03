@@ -1,0 +1,25 @@
+# Ignore Rust build artifacts
+target/
+debug/
+release/
+
+# Ignore Cargo related files
+Cargo.lock
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore IDE/editor configuration files
+*.swp
+*.swo
+.vscode/
+.idea/
+*.iml
+
+# Ignore temporary and OS-specific files
+*.DS_Store
+*.log
+node_modules/
+
+database/*.sqlite

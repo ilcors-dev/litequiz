@@ -1,21 +1,30 @@
-version: '3.8'
-
+name: "litequiz"
 services:
   backend:
     build:
-      context: .
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-    volumes:
-      - backend-data:/app/data
+      context: ./backend-next
+      dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - "4000:4000"
+    environment:
+      - SECRET_KEY=bigsecret
+      - DATABASE_URL=./database/db.sqlite
+    networks:
+      - app-network
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend-next
+      dockerfile: Dockerfile
     ports:
-      - '3001:80'
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - ./frontend-next/.env.production
+    networks:
+      - app-network
 
-volumes:
-  backend-data:
+networks:
+  app-network:
+    driver: bridge

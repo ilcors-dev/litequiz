@@ -19,7 +19,7 @@ interface Props {
 
 export const QuizDestroy = ({ btnIcon, popupMessage }: Props) => {
   const deleteQuiz = async () => {
-    await api.delete("destroyQuiz");
+    await api.delete("destroyQuizStatus");
     window.location.href = "/";
   };
 
